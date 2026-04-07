@@ -1,0 +1,248 @@
+.hero {
+    position: relative;
+    width: 100%;
+    height: 485px;
+    overflow: hidden;
+    max-width: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* hero slide text */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    color: white;
+    padding: 2rem;
+    transform: translateY(100%);
+    transition: transform 0.5s ease-out;
+    transform: translateY(0);
+}
+
+.overlay h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.overlay p {
+    font-size: 1.2rem;
+}
+
+.hero-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.active, dot:hover {
+    background: white;
+    box-shadow: 0 0 8px rgba(255,255,255,1);
+}
+
+/* below the hero section */
+.three-cards {
+    margin: 0rem 0;
+}
+
+.three-cards-header {
+    width: 100%;
+    height: 85px;
+    background: 
+        linear-gradient(rgba(48, 62, 82, 0.7), rgba(7, 54, 247, 0.7)),
+        url("/assets/header1.png") center/cover no-repeat;
+    
+    padding: 1.5rem;
+    border-radius: 1px;
+    margin-bottom: 1rem;
+}
+
+.three-cards-header h3 {
+    font-size: 2rem;
+    color: white;
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+}
+
+.card-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 2200px;
+    max-height: 100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background: url("/assets/design1.png") center/cover no-repeat;
+    border: 1px solid #182f92;
+    border-radius: 16px;
+    padding: 0.75rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 175px;
+    width: 605px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 0rem;
+    color: #3b82f6;
+}
+
+.card:hover {
+    background: url("/assets/design1.png") center/cover no-repeat;
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    border-color: #cbd5e1;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #1e293b;
+}
+
+.card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #64748b;
+    padding: 0rem 0.5rem;
+    margin: 0;
+}
+
+.quality-section {
+    background: #ffffff;
+    background-image: url('../assets/hr.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    padding: 100px 0 150px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 6rem;
+}
+
+.quality-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex-wrap: wrap;
+}
+
+.quality-content h2 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.quality-content p {
+    font-size: 1.1rem;
+    color: #64748b;
+    line-height: 1.7;
+    max-width: 500px;
+}
+
+.video-wrapper {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .three-cards-header h3 {
+        font-size: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .card {
+        padding: 1.25rem 1.5rem;
+        min-height: 200px;
+    }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .hero {
+        height: 400px;
+        margin: 1rem auto;
+    }
+}

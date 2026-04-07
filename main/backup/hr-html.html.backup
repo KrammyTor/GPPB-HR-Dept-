@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPPB HR Portal</title>
+    <link rel="stylesheet" href="hr-css.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Human Resources Department Portal</h1>
+        <img src="../assets/gppb.png" alt="GPPB HR Logo" class="logo">
+    </header>
+
+    <!-- Sidebar -->
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#employee-management" id="emp-mgmt-link">Employee Management</a></li>
+                <li><a href="#downloadable-forms" id="download-link">Downloadable Files</a></li>
+                <li><a href="#">Leave Requests</a></li>
+            </ul>
+            <div class="clock">
+                <div id="time">00:00:00</div>
+                <div id="date"></div>
+            </div>
+        </nav>
+        <!-- The image at home -->
+        <main class="main-content">
+            <div id="home" class="hero-section">
+                <div class="hero-slider">
+                    <div class="slide active">
+                        <img src="../assets/hr-2.png" alt="Office team" class="hero-img">
+                        <div class="hero-overlay">
+                            <h2>Welcome to GPPB HR</h2>
+                            <p>Empowering our workforce for government excellence.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="../assets/gg.png" alt="Office team" class="hero-img">
+                        <div class="hero-overlay">
+                            <h2>Employee Success</h2>
+                            <p>Managing careers and growth in public service.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="../assets/hr5.png" alt="Government building" class="hero-img">
+                        <div class="hero-overlay">
+                            <h2>Government HR Excellence</h2>
+                            <p>Official announcements and updates.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-nav">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+            </div>
+
+            <!-- NEW HR RESOURCES SECTION -->
+            <section id="hr-resources" class="hr-resources">
+                <div class="resources-header">
+                    <h2>Explore HR Resources, Policies, Training, Internship and Job Opportunities.</h2>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">💼</div>
+                        <h3>JOB OPENINGS</h3>
+                        <p>Explore available roles and apply for opportunities.</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">📄</div>
+                        <h3>FORMS & DOCUMENTS</h3>
+                        <p>Access forms, policies, and essential HR resources.</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">🎓</div>
+                        <h3>INTERNSHIPS</h3>
+                        <p>Gain experience through hands-on internship programs.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Placeholder Stack FIRST (no text) -->
+            <div id="placeholder-section" class="image-stack" style="display: none;">
+                <div class="stack-slide active" style="background-image: url('../assets/pplA.png');"></div>
+                <div class="stack-slide" style="background-image: url('../assets/pplB.png');"></div>
+            </div>
+
+            <!-- Pure Parallax supp.png LAST (no text/glass) -->
+            <div id="supp-section" class="parallax-section" style="display: none;">
+                <div class="parallax-bg" data-img="../assets/supp.png"></div>
+            </div>
+
+            <div id="dashboard" class="content-placeholder" style="display: none;">
+                <h2>Dashboard</h2>
+                <p>testing 456</p>
+            </div>
+
+
+            <div class="card-grid" style="display: none;">
+                <div class="card">
+                    <h3>New Employees</h3>
+                    <p>test 123</p>
+                </div>
+                <div class="card">
+                    <h3>Pending Leaves</h3>
+                    <p>test 456</p>
+                </div>
+                <div class="card">
+                    <h3>Payroll Status</h3>
+                    <p>test 789</p>
+                </div>
+            </div>
+
+            <!-- Employee Management Section -->
+            <section id="employee-management" class="employee-section" style="display: none;">
+                <div class="section-header">
+                    <h2>Employee Management</h2>
+                    <button id="add-employee-btn" class="btn btn-primary">Add Employee</button>
+                </div>
+                <input type="text" id="emp-search" placeholder="Search employees..." class="search-input">
+                <table id="employee-table" class="emp-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <!-- Login Modal -->
+            <div id="login-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Admin Login Required</h3>
+                    <form id="login-form">
+                        <input type="text" id="username" placeholder="Username" required>
+                        <input type="password" id="password" placeholder="Password" required>
+                        <div id="login-error" class="error-message" style="display: none;">Invalid credentials. Use admin/123</div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Add/Edit Employee Modal -->
+            <div id="emp-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 id="modal-title">Add Employee</h3>
+                    <form id="emp-form">
+                        <input type="hidden" id="edit-id">
+                        <input type="text" id="emp-name" placeholder="Full Name" required>
+                        <input type="text" id="emp-position" placeholder="Position" required>
+                        <input type="text" id="emp-dept" placeholder="Department" required>
+                        <input type="email" id="emp-email" placeholder="Email" required>
+                        <select id="emp-status" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="On Leave">On Leave</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Downloadable Files Section -->
+            <section id="downloadable-forms" class="download-section" style="display: none;">
+                <div class="section-header">
+                    <h2>Downloadable Forms</h2>
+                    <p class="section-desc">Official HR forms and documents for GPPB employees</p>
+                </div>
+                <div class="download-grid">
+                    <div class="download-card">
+                        <div class="download-icon">📄</div>
+                        <h3>Form 1</h3>
+                        <p>testing 123</p>
+                        <a href="#" class="download-btn" data-file="Leave-Request-Form.pdf">Download PDF <span>→</span></a>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-icon">📋</div>
+                        <h3>Form 2</h3>
+                        <p>testing 456</p>
+                        <a href="#" class="download-btn" data-file="Employment-Certificate.pdf">Download PDF <span>→</span></a>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-icon">📝</div>
+                        <h3>Form 3</h3>
+                        <p>testing 789</p>
+                        <a href="#" class="download-btn" data-file="Change-Info-Form.pdf">Download PDF <span>→</span></a>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-icon">💰</div>
+                        <h3>Form 4</h3>
+                        <p>Testing 101112</p>
+                        <a href="#" class="download-btn" data-file="Payroll-Auth.pdf">Download PDF <span>→</span></a>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-icon">📜</div>
+                        <h3>Form 5</h3>
+                        <p>testing 131415</p>
+                        <a href="#" class="download-btn" data-file="Overtime-Form.pdf">Download PDF <span>→</span></a>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-icon">🏥</div>
+                        <h3>Form 6</h3>
+                        <p>testing 161718</p>
+                        <a href="#" class="download-btn" data-file="Medical-Reimbursement.pdf">Download PDF <span>→</span></a>
+                    </div>
+                </div>
+                <div class="download-instructions">
+                    <h4>Instructions:</h4>
+                    <ul>
+                        <li>Download the form you need</li>
+                        <li>Fill out completely and legibly</li>
+                        <li>Submit to HR Department (signed by immediate supervisor where applicable)</li>
+                        <li>Digital signatures accepted for most forms</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div class="shenanigans">
+            <div class="floating-icon" data-icon="👋"></div>
+            <div class="floating-icon" data-icon="📊"></div>
+            <div class="floating-icon" data-icon="💼"></div>
+            <div class="floating-icon" data-icon="📈"></div>
+            <canvas id="particles-canvas"></canvas>
+        </div>
+    </div>
+
+    <script src="hr-js.js"></script>
+</body>
+</html>

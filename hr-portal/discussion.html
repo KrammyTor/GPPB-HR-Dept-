@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Discussion Board</title>
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/discussion.css">
+</head>
+
+<body>
+
+<div id="site-header"></div>
+
+<div class="page-container">
+    <!-- INFO SECTION -->
+    <div class="info-section">
+        <h3>How to Use Discussion Board</h3>
+        <p><strong>Welcome!</strong> Use this board to submit feedback and concerns. Click <strong>"Submit Feedback"</strong> (floating button) to share anonymously. Filter posts by status and priority. HR team reviews <strong>High Priority</strong> items first.</p>
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="High Priority">High Priority</button>
+        <button class="filter-btn" data-filter="Pending">Pending</button>
+        <button class="filter-btn" data-filter="Viewed">Viewed</button>
+        <button class="filter-btn" data-filter="Not Viewed">Not Viewed</button>
+    </div>
+
+    <!-- BACKDROP WRAPPER -->
+    <div class="board-backdrop">
+        <div id="feedbackBoard" class="feedback-board"></div>
+    </div>
+</div>
+
+<!-- FLOATING BUTTON -->
+<button id="openModalBtn" class="floating-btn">Submit Feedback</button>
+
+<!-- MODAL -->
+<div id="feedbackModal" class="modal">
+    <div class="modal-content">
+
+        <h2>Submit Feedback</h2>
+
+        <p id="errorMsg" class="error-msg"></p>
+        <p id="successMsg" class="success-msg"></p>
+
+        <div class="name-row">
+            <input type="text" id="firstName" placeholder="First Name" maxlength="32">
+            <input type="text" id="lastName" placeholder="Last Name" maxlength="30">
+        </div>
+
+        <input type="text" id="department" placeholder="Department / Field">
+        <input type="email" id="email" placeholder="Email" maxlength="64">
+
+        <textarea id="concern" placeholder="Your Concern / Feedback"></textarea>
+
+        <select id="priority">
+            <option value="Pending">Pending</option>
+            <option value="High Priority">High Priority</option>
+        </select>
+
+        <div class="modal-buttons">
+            <button id="submitFeedback" class="btn-submit">Submit Feedback</button>
+            <button id="closeModal" class="btn-cancel">Cancel</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="shenanigans">
+    <div class="floating-icon" data-icon="👋"></div>
+    <div class="floating-icon" data-icon="📊"></div>
+    <div class="floating-icon" data-icon="💼"></div>
+    <div class="floating-icon" data-icon="📈"></div>
+    <canvas id="particles-canvas"></canvas>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="js/global.js"></script>
+<script src="js/discussion.js"></script>
+
+</body>
+</html>

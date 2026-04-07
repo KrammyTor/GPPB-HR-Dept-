@@ -1,0 +1,342 @@
+// ------------ Home ------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    // Show home by default with new sections
+    showHome();
+
+    // Parallax scroll effect for supp.png
+    let ticking = false;
+    function updateParallax() {
+        const parallaxBg = document.querySelector('.parallax-bg');
+        if (parallaxBg) {
+            const rect = document.querySelector('.parallax-section').getBoundingClientRect();
+            const scrollY = window.scrollY;
+            const yPos = -(scrollY * 0.5) + (rect.top * 0.5);
+            parallaxBg.style.backgroundImage = `url(${parallaxBg.dataset.img})`;
+            parallaxBg.style.transform = `translateY(${yPos}px)`;
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    });
+
+    // floating emojis
+    const icons = document.querySelectorAll('.floating-icon');
+    const emojis = ['👋', '📊', '💼', '📈', '🎯', '🚀'];
+    icons.forEach((icon, index) => {
+        icon.textContent = emojis[index % emojis.length];
+    });
+
+    // Canvas particles for shenanigans
+    const canvas = document.getElementById('particles-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        canvas.width = 300;
+        canvas.height = window.innerHeight - 160;
+
+        const particles = [];
+        for (let i = 0; i < 50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                radius: Math.random() * 3 + 1,
+                color: `hsl(${Math.random() * 60 + 180}, 70%, 60%)` // Blues/greens
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    }
+
+    // Hero slider auto & dot navigation
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(index);
+        });
+    });
+
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }, 5000);
+
+    // lulutang yung cards
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+// Basic link nav (non-protected)
+    const links = document.querySelectorAll('.sidebar a[href^=\"#\"]:not(#emp-mgmt-link):not(#download-link)');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            
+            // Hide only non-home sections
+            document.querySelectorAll('#dashboard, .card-grid, .employee-section, #downloadable-forms').forEach(section => section.style.display = 'none');
+            
+            if (targetId === 'home') {
+                showHome();
+            } else {
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) targetSection.style.display = 'block';
+            }
+        });
+    });
+
+
+
+
+    // Download link handler
+    const downloadLink = document.getElementById('download-link');
+    if (downloadLink) {
+        downloadLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.content-placeholder, .hero-section, .card-grid, .employee-section').forEach(section => section.style.display = 'none');
+            document.getElementById('downloadable-forms').style.display = 'block';
+        });
+    }
+
+    // Placeholder stack auto-rotate (4s vs hero 5s)
+    const stackSlides = document.querySelectorAll('.stack-slide');
+    let currentStack = 0;
+    setInterval(() => {
+        if (stackSlides.length > 1) {
+            stackSlides.forEach(slide => slide.classList.remove('active'));
+            currentStack = (currentStack + 1) % stackSlides.length;
+            stackSlides[currentStack].classList.add('active');
+        }
+    }, 4000);
+
+    // Clock PH time
+    function updateClock() {
+        const phTimeStr = new Date().toLocaleString("en-PH", { timeZone: "Asia/Manila" });
+        const now = new Date(phTimeStr);
+
+        const timeStr = now.toLocaleTimeString('en-PH', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+
+        const dateStr = now.toLocaleDateString('en-PH', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        const timeEl = document.getElementById('time');
+        const dateEl = document.getElementById('date');
+        if (timeEl) timeEl.textContent = timeStr;
+        if (dateEl) dateEl.textContent = dateStr;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+});
+
+// ============= Employee Management =================
+let employees = JSON.parse(localStorage.getItem('employees')) || [
+    {id: 1, name: 'John Doe', position: 'HR Manager', dept: 'Human Resources', email: 'john@gppb.gov.ph', status: 'Active'},
+    {id: 2, name: 'Jane Smith', position: 'Payroll Specialist', dept: 'Finance', email: 'jane@gppb.gov.ph', status: 'Active'},
+    {id: 3, name: 'Mike Johnson', position: 'Recruitment Officer', dept: 'HR', email: 'mike@gppb.gov.ph', status: 'On Leave'},
+    {id: 4, name: 'Sarah Wilson', position: 'Training Coordinator', dept: 'Learning & Dev', email: 'sarah@gppb.gov.ph', status: 'Inactive'},
+    {id: 5, name: 'David Brown', position: 'Benefits Admin', dept: 'HR', email: 'david@gppb.gov.ph', status: 'Active'}
+];
+
+function showHome() {
+    // Hide all other sections
+    document.querySelectorAll('.content-placeholder, .card-grid, .employee-section, #downloadable-forms').forEach(s => s.style.display = 'none');
+    
+    // Show home + new home-only sections
+    document.getElementById('home').style.display = 'block';
+    document.getElementById('supp-section').style.display = 'block';
+    document.getElementById('placeholder-section').style.display = 'block';
+    document.getElementById('hr-resources').style.display = 'block';
+    
+    // Reset placeholder slider to first slide
+    const stackSlides = document.querySelectorAll('.stack-slide');
+    stackSlides.forEach((slide, i) => slide.classList.toggle('active', i === 0));
+}
+
+function showLoginModal() {
+    document.getElementById('login-modal').style.display = 'flex';
+}
+
+function hideLoginModal() {
+    document.getElementById('login-modal').style.display = 'none';
+    showHome();
+}
+
+function showEmpModal(editEmployee = null) {
+    const modal = document.getElementById('emp-modal');
+    const title = document.getElementById('modal-title');
+    const form = document.getElementById('emp-form');
+    
+    if (editEmployee) {
+        title.textContent = 'Edit Employee';
+        document.getElementById('edit-id').value = editEmployee.id;
+        document.getElementById('emp-name').value = editEmployee.name;
+        document.getElementById('emp-position').value = editEmployee.position;
+        document.getElementById('emp-dept').value = editEmployee.dept;
+        document.getElementById('emp-email').value = editEmployee.email;
+        document.getElementById('emp-status').value = editEmployee.status;
+    } else {
+        title.textContent = 'Add Employee';
+        document.getElementById('edit-id').value = '';
+        form.reset();
+    }
+    modal.style.display = 'flex';
+}
+
+function hideEmpModal() {
+    document.getElementById('emp-modal').style.display = 'none';
+}
+
+function renderEmployees(filter = '') {
+    const tbody = document.querySelector('#employee-table tbody');
+    tbody.innerHTML = '';
+    
+    const filtered = employees.filter(emp => 
+        emp.name.toLowerCase().includes(filter.toLowerCase()) ||
+        emp.position.toLowerCase().includes(filter.toLowerCase()) ||
+        emp.email.toLowerCase().includes(filter.toLowerCase())
+    );
+    
+    filtered.forEach(emp => {
+        const statusClass = `status-badge status-${emp.status.toLowerCase().replace(/ /g, '-')}`;
+        const row = tbody.insertRow();
+        row.innerHTML = `
+            <td>${emp.id}</td>
+            <td>${emp.name}</td>
+            <td>${emp.position}</td>
+            <td>${emp.dept}</td>
+            <td>${emp.email}</td>
+            <td><span class="${statusClass}">${emp.status}</span></td>
+            <td>
+                <button onclick="editEmployee(${emp.id})" class="btn btn-primary btn-sm">Edit</button>
+                <button onclick="deleteEmployee(${emp.id})" class="btn btn-danger btn-sm">Delete</button>
+            </td>
+        `;
+    });
+}
+
+// Login
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('login-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const errorEl = document.getElementById('login-error');
+        if (document.getElementById('username').value === 'admin' && document.getElementById('password').value === '123') {
+            errorEl.style.display = 'none';
+            hideLoginModal();
+            // Hide ALL sections including new home-only ones (hr-resources now included)
+            document.querySelectorAll('#home, #supp-section, #placeholder-section, #hr-resources, .hero-section, .card-grid, .content-placeholder, #downloadable-forms').forEach(s => s.style.display = 'none');
+            document.getElementById('employee-management').style.display = 'block';
+            renderEmployees();
+        } else {
+            errorEl.textContent = 'Invalid credentials. Use admin/123';
+            errorEl.style.display = 'block';
+        }
+    });
+
+    // Modal closes
+    document.querySelectorAll('.close').forEach(closeBtn => {
+        closeBtn.addEventListener('click', function() {
+            this.closest('.modal').style.display = 'none';
+            if (this.closest('#login-modal')) showHome();
+        });
+    });
+
+    // Employee link
+    document.getElementById('emp-mgmt-link')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        showLoginModal();
+    });
+
+    // Add employee
+    document.getElementById('add-employee-btn')?.addEventListener('click', function() {
+        showEmpModal();
+    });
+
+    // Employee form
+    document.getElementById('emp-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const editId = document.getElementById('edit-id').value;
+        const empData = {
+            id: editId ? parseInt(editId) : Date.now(),
+            name: document.getElementById('emp-name').value,
+            position: document.getElementById('emp-position').value,
+            dept: document.getElementById('emp-dept').value,
+            email: document.getElementById('emp-email').value,
+            status: document.getElementById('emp-status').value
+        };
+        if (editId) {
+            employees[employees.findIndex(e => e.id === parseInt(editId))] = empData;
+        } else {
+            employees.push(empData);
+        }
+        localStorage.setItem('employees', JSON.stringify(employees));
+        hideEmpModal();
+        renderEmployees(document.getElementById('emp-search')?.value || '');
+    });
+
+    // Search
+    document.getElementById('emp-search')?.addEventListener('input', function(e) {
+        renderEmployees(e.target.value);
+    });
+});
+
+// Global onclick functions
+function editEmployee(id) {
+    const emp = employees.find(e => e.id === id);
+    showEmpModal(emp);
+}
+
+function deleteEmployee(id) {
+    if (confirm('Delete this employee?')) {
+        employees = employees.filter(e => e.id !== id);
+        localStorage.setItem('employees', JSON.stringify(employees));
+        renderEmployees('');
+    }
+}
