@@ -1,46 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Discussion Board</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback & Concerns - GPPB-TSO</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/discussion.css">
 </head>
-
 <body>
-
 <div id="site-header"></div>
 
+<!-- Hero Section -->
+<section class="discussion-hero">
+    <div class="hero-content">
+        <h1>Feedback & Concerns</h1>
+        <p>Share your thoughts, submit feedback or report concerns. Your input helps us improve.</p>
+        <div class="hero-search">
+            <input type="text" id="globalSearch" placeholder="🔍 Search feedback by name, department, or concern...">
+            <button class="search-btn" onclick="searchFeedbacks()">Search</button>
+        </div>
+    </div>
+</section>
+
 <div class="page-container">
-    <!-- INFO SECTION -->
+    <!-- Info Section -->
     <div class="info-section">
         <h3>How to Use Discussion Board</h3>
-        <p><strong>Welcome!</strong> Use this board to submit feedback and concerns. Click <strong>"Submit Feedback"</strong> (floating button) to share anonymously. Filter posts by status and priority. HR team reviews <strong>High Priority</strong> items first.</p>
+        <p><strong>Welcome!</strong> Click <strong>"Submit Feedback"</strong> (floating purple button) to share anonymously. Use filters to view by status/priority. Click any card to mark as viewed.</p>
     </div>
 
-    <!-- FILTER TABS -->
+    <!-- Filter Tabs -->
     <div class="filter-tabs">
-        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn active" data-filter="all">All Feedback</button>
         <button class="filter-btn" data-filter="High Priority">High Priority</button>
         <button class="filter-btn" data-filter="Pending">Pending</button>
         <button class="filter-btn" data-filter="Viewed">Viewed</button>
         <button class="filter-btn" data-filter="Not Viewed">Not Viewed</button>
     </div>
 
-    <!-- BACKDROP WRAPPER -->
+    <!-- Board -->
     <div class="board-backdrop">
         <div id="feedbackBoard" class="feedback-board"></div>
     </div>
 </div>
 
-<!-- FLOATING BUTTON -->
-<button id="openModalBtn" class="floating-btn">Submit Feedback</button>
+<!-- Floating Button -->
+<button id="openModalBtn" class="floating-btn">
+    <span>📝 Submit Feedback</span>
+</button>
 
-<!-- MODAL -->
+<!-- Modal -->
 <div id="feedbackModal" class="modal">
     <div class="modal-content">
-
-        <h2>Submit Feedback</h2>
+        <h2>Submit Feedback & Concern</h2>
 
         <p id="errorMsg" class="error-msg"></p>
         <p id="successMsg" class="success-msg"></p>
@@ -51,9 +63,8 @@
         </div>
 
         <input type="text" id="department" placeholder="Department / Field">
-        <input type="email" id="email" placeholder="Email" maxlength="64">
-
-        <textarea id="concern" placeholder="Your Concern / Feedback"></textarea>
+        <input type="email" id="email" placeholder="Email (optional)">
+        <textarea id="concern" placeholder="Describe your concern or feedback in detail..."></textarea>
 
         <select id="priority">
             <option value="Pending">Pending</option>
@@ -64,22 +75,13 @@
             <button id="submitFeedback" class="btn-submit">Submit Feedback</button>
             <button id="closeModal" class="btn-cancel">Cancel</button>
         </div>
-
     </div>
-</div>
-
-<div class="shenanigans">
-    <div class="floating-icon" data-icon="👋"></div>
-    <div class="floating-icon" data-icon="📊"></div>
-    <div class="floating-icon" data-icon="💼"></div>
-    <div class="floating-icon" data-icon="📈"></div>
-    <canvas id="particles-canvas"></canvas>
 </div>
 
 <div id="site-footer"></div>
 
 <script src="js/global.js"></script>
 <script src="js/discussion.js"></script>
-
 </body>
 </html>
+

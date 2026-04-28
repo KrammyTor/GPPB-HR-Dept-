@@ -1,80 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Forms</title>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Forms & Documents - GPPB-TSO</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/forms.css">
 </head>
-
 <body>
 <div id="site-header"></div>
 
-<div class="title-container">
-    <div class="forms-hero">
-        <div class="hero-cta">Access and download essential HR forms</div>
-    </div>
-    <div class="forms-grid">
-        <div class="form-card" data-form="job-application">
-            <div class="form-icon">📄</div>
-            <h3>Form 1</h3>
-            <p>description here</p>
-            <button class="download-btn">Download PDF</button>
-        </div>
-        <div class="form-card" data-form="leave-request">
-            <div class="form-icon">📄</div>
-            <h3>Form 2</h3>
-            <p>description here.</p>
-            <button class="download-btn">Download PDF</button>
-        </div>
-        <div class="form-card" data-form="onboarding">
-            <div class="form-icon">📄</div>
-            <h3>Form 3</h3>
-            <p>description here.</p>
-            <button class="download-btn">Download PDF</button>
-        </div>
-        <div class="form-card" data-form="performance">
-            <div class="form-icon">📄</div>
-            <h3>Form 4</h3>
-            <p>description here</p>
-            <button class="download-btn">Download PDF</button>
-        </div>
-        <div class="form-card" data-form="expense">
-            <div class="form-icon">📄</div>
-            <h3>Form 5</h3>
-            <p>description here</p>
-            <button class="download-btn">Download PDF</button>
-        </div>
-            <div class="form-card" data-form="expense">
-            <div class="form-icon">📄</div>
-            <h3>Form 6</h3>
-            <p>description here</p>
-            <button class="download-btn">Download PDF</button>
+<!-- Hero Section -->
+<section class="forms-hero">
+    <div class="hero-content">
+        <h1>HR Forms & Documents</h1>
+        <p>Access all essential HR forms instantly. Download, fill, and submit digitally or print.</p>
+        <div class="hero-search">
+            <input type="text" id="formSearch" placeholder="Search forms (e.g., leave, application, onboarding)...">
+            <button class="search-btn">Search</button>
         </div>
     </div>
-</div>
+</section>
 
-<div class="download-instructions">
-    <h4>Instructions:</h4>
-    <ul>
-        <li>Download the form you need</li>
-        <li>Submit to HR Department (signed by immediate supervisor where applicable)</li>
-        <li>Digital signatures accepted for most forms</li>
-    </ul>
-</div>
+<!-- Main Content -->
+<main class="forms-main">
+    <div class="forms-container">
+        <!-- Filter Tabs -->
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Forms (12+)</button>
+            <button class="filter-btn" data-filter="application">Application</button>
+            <button class="filter-btn" data-filter="leave">Leave</button>
+            <button class="filter-btn" data-filter="performance">Performance</button>
+            <button class="filter-btn" data-filter="onboarding">Onboarding</button>
+        </div>
 
-<div class="shenanigans">
-    <div class="floating-icon" data-icon="👋"></div>
-    <div class="floating-icon" data-icon="📊"></div>
-    <div class="floating-icon" data-icon="💼"></div>
-    <div class="floating-icon" data-icon="📈"></div>
-    <canvas id="particles-canvas"></canvas>
-</div>
+        <!-- Forms Grid -->
+        <div class="forms-grid" id="formsGrid">
+            <div class="form-card" data-category="application" data-keywords="job application vacancy">
+                <div class="form-icon">📋</div>
+                <h3>Form 1</h3>
+                <p>???</p>
+                <button class="download-btn" data-form="job-application">Download PDF</button>
+            </div>
+            <div class="form-card" data-category="leave" data-keywords="leave request vacation">
+                <div class="form-icon">📅</div>
+                <h3>Form 2</h3>
+                <p>???</p>
+                <button class="download-btn" data-form="leave-request">Download PDF</button>
+            </div>
+            <div class="form-card" data-category="onboarding" data-keywords="new employee orientation">
+                <div class="form-icon">👋</div>
+                <h3>Form  3</h3>
+                <p>???</p>
+                <button class="download-btn" data-form="onboarding">Download PDF</button>
+            </div>
+            <div class="form-card" data-category="performance" data-keywords="evaluation review">
+                <div class="form-icon">📊</div>
+                <h3>Form 4</h3>
+                <p>???</p>
+                <button class="download-btn" data-form="performance">Download PDF</button>
+            </div>
+            <div class="form-card" data-category="application" data-keywords="internship training">
+                <div class="form-icon">🎓</div>
+                <h3>Form 5</h3>
+                <p>???</p>
+                <button class="download-btn" data-form="training">Download PDF</button>
+            </div>
+            <div class="form-card" data-category="leave" data-keywords="reimbursement expense">
+                <div class="form-icon">💰</div>
+                <h3>Form 6</h3>
+                <p>???</p>
+                <button class="download-btn" data-form="expense">Download PDF</button>
+            </div>
+            <div class="form-card" data-category="performance" data-keywords="feedback concern">
+                <div class="form-icon">💬</div>
+                <h3>Form 7</h3>
+                <p>???</p>
+                <button class="download-btn" data-form="feedback">Download PDF</button>
+            </div>
+            <div class="form-card" data-category="onboarding" data-keywords="personal information">
+                <div class="form-icon">👤</div>
+                <h3>Form 8</h3>
+                <p>???</p>
+                <button class="download-btn" data-form="personal">Download PDF</button>
+            </div>
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results" style="display: none;">
+            <h3>No forms found</h3>
+            <p>Try adjusting your search terms</p>
+        </div>
+    </div>
+</main>
+
+<!-- Instructions Section -->
+<section class="instructions-section">
+    <div class="instructions-content">
+        <h2>How to Use HR Forms</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <p>Download your form</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <p>Fill digitally or print</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <p>Email to hr@gov.ph or drop at HR</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div id="site-footer"></div>
 
 <script src="js/global.js"></script>
 <script src="js/forms.js"></script>
-
 </body>
 </html>
+

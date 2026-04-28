@@ -1,19 +1,20 @@
+// Modern Discussion Board JS - Enhanced UX with Search
 let currentFilter = "all";
+let searchTerm = '';
 let feedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
 
-    // =========================
-    // ELEMENTS
-    // =========================
+// Elements
 const board = document.getElementById("feedbackBoard");
 const modal = document.getElementById("feedbackModal");
 const openBtn = document.getElementById("openModalBtn");
 const closeBtn = document.getElementById("closeModal");
 const submitBtn = document.getElementById("submitFeedback");
+const globalSearch = document.getElementById("globalSearch");
 
 const errorMsg = document.getElementById("errorMsg");
 const successMsg = document.getElementById("successMsg");
 
-// inputs
+// Inputs
 const firstName = document.getElementById("firstName");
 const lastName = document.getElementById("lastName");
 const department = document.getElementById("department");
@@ -21,9 +22,7 @@ const email = document.getElementById("email");
 const concern = document.getElementById("concern");
 const priority = document.getElementById("priority");
 
-    // =========================
-    // FILTER BUTTONS
-    // =========================
+// Filter buttons
 const filterBtns = document.querySelectorAll(".filter-btn");
 
 filterBtns.forEach(btn => {
@@ -36,179 +35,178 @@ filterBtns.forEach(btn => {
     });
 });
 
-    // =========================
-    // OPEN MODAL
-    // =========================
+// Global Search
+globalSearch.addEventListener("input", (e) => {
+    searchTerm = e.target.value.toLowerCase().trim();
+    renderFeedbacks();
+});
+
+function searchFeedbacks() {
+    renderFeedbacks();
+}
+
+// Modal Events
 openBtn.onclick = () => {
     modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
     resetFormState();
 };
 
-    // =========================
-    // CLOSE MODAL
-    // =========================
 closeBtn.onclick = () => {
     modal.style.display = "none";
+    document.body.style.overflow = "";
 };
 
-    // =========================
-    // VALIDATION
-    // =========================
+window.onclick = (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+    }
+};
+
+// Validation (email optional)
 function validate() {
     let valid = true;
-
-    const inputs = [firstName, lastName, department, email, concern];
+    const inputs = [firstName, lastName, department, concern];
 
     inputs.forEach(input => {
-        input.classList.remove("input-error");
-
+        input.classList.remove("input-error", "input-success");
         if (!input.value.trim()) {
             input.classList.add("input-error");
             valid = false;
         }
     });
 
+    // Optional email validation
+    if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+        email.classList.add("input-error");
+        valid = false;
+    }
+
     return valid;
 }
 
-    // =========================
-    // SUBMIT
-    // =========================
+// Submit
 submitBtn.onclick = () => {
-
     resetFormState();
 
     if (!validate()) {
-        errorMsg.textContent = "Please fill out all fields.";
+        errorMsg.textContent = "Please fill all required fields correctly.";
         errorMsg.style.display = "block";
         return;
     }
 
     const newFeedback = {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        department: department.value,
-        email: email.value,
-        concern: concern.value,
+        firstName: firstName.value.trim(),
+        lastName: lastName.value.trim(),
+        department: department.value.trim(),
+        email: email.value.trim(),
+        concern: concern.value.trim(),
         status: "Not Viewed by Admin",
         priority: priority.value,
-        time: new Date().toLocaleString()
+        time: new Date().toLocaleString("en-US", { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        })
     };
 
-    feedbacks.push(newFeedback);
+    feedbacks.unshift(newFeedback); // Add to top
     localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
 
-    // SUCCESS UI
-    successMsg.textContent = "Feedback sent successfully!";
+    // Success UI
+    successMsg.textContent = "✅ Feedback submitted successfully! Thank you.";
     successMsg.style.display = "block";
-
-    const inputs = [firstName, lastName, department, email, concern];
-    inputs.forEach(input => input.classList.add("input-success"));
+    [firstName, lastName, department, concern, email].forEach(input => input.classList.add("input-success"));
 
     setTimeout(() => {
         modal.style.display = "none";
+        document.body.style.overflow = "";
         clearForm();
         resetFormState();
         renderFeedbacks();
-    }, 1000);
+    }, 1500);
 };
 
 function resetFormState() {
     errorMsg.style.display = "none";
     successMsg.style.display = "none";
-
-    const inputs = [firstName, lastName, department, email, concern];
-
-    inputs.forEach(input => {
-        input.classList.remove("input-error");
-        input.classList.remove("input-success");
+    [firstName, lastName, department, email, concern].forEach(input => {
+        input.classList.remove("input-error", "input-success");
     });
 }
 
-    // =========================
-    // CLEAR
-    // =========================
 function clearForm() {
-    firstName.value = "";
-    lastName.value = "";
-    department.value = "";
-    email.value = "";
-    concern.value = "";
+    firstName.value = lastName.value = department.value = email.value = concern.value = "";
+    priority.value = "Pending";
 }
 
-    // =========================
-    // MARKK AS VIEWED
-    // =========================
+// Mark as viewed
 function markAsViewed(index) {
     if (feedbacks[index].status === "Not Viewed by Admin") {
         feedbacks[index].status = "Viewed by Admin";
         localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+        renderFeedbacks();
     }
 }
-    // =========================
-    // RENDER
-    // =========================
+
+// Main Render Function
 function renderFeedbacks() {
-    board.innerHTML = "";
+    board.innerHTML = '';
 
-    let hasResults = false;
+    let filteredFeedbacks = feedbacks.filter(fb => {
+        const matchesFilter = currentFilter === "all" || 
+            (currentFilter === "High Priority" && fb.priority === "High Priority") ||
+            (currentFilter === "Pending" && fb.priority === "Pending") ||
+            (currentFilter === "Viewed" && fb.status === "Viewed by Admin") ||
+            (currentFilter === "Not Viewed" && fb.status === "Not Viewed by Admin");
 
-    feedbacks.forEach((fb, index) => {
+        const matchesSearch = !searchTerm || 
+            fb.firstName.toLowerCase().includes(searchTerm) ||
+            fb.lastName.toLowerCase().includes(searchTerm) ||
+            fb.department.toLowerCase().includes(searchTerm) ||
+            fb.concern.toLowerCase().includes(searchTerm);
 
-        if (currentFilter === "High Priority" && fb.priority !== "High Priority") return;
-        if (currentFilter === "Pending" && fb.priority !== "Pending") return;
-        if (currentFilter === "Viewed" && fb.status !== "Viewed by Admin") return;
-        if (currentFilter === "Not Viewed" && fb.status !== "Not Viewed by Admin") return;
-
-        hasResults = true;
-
-        const card = document.createElement("div");
-        card.classList.add("feedback-card");
-
-        // STATUS CLASS
-        let statusClass = "not-viewed";
-        if (fb.status === "Viewed by Admin") statusClass = "viewed";
-        if (fb.priority === "High Priority") statusClass = "high";
-        if (fb.priority === "Pending") statusClass = "pending";
-
-        card.innerHTML = `
-            <h3>${fb.firstName} ${fb.lastName}</h3>
-
-            <p>${fb.department}</p>
-            <p>${fb.email}</p>
-
-            <div class="concern">
-                ${fb.concern}
-            </div>
-
-            <span class="status ${statusClass}">
-                ${fb.status}
-            </span>
-
-            <p class="time">
-                ${fb.time || "No timestamp"}
-            </p>
-        `;
-
-        card.onclick = () => {
-            markAsViewed(index);
-            renderFeedbacks();
-        };
-
-        board.appendChild(card);
+        return matchesFilter && matchesSearch;
     });
 
-    // =========================
-    // EMPTY STATE IN FEEDBACK
-    // =========================
-    if (!hasResults) {
+    if (filteredFeedbacks.length === 0) {
         board.innerHTML = `
             <div class="empty-state">
-                No feedback found in this category.
+                <h3>📭 No feedback found</h3>
+                <p>No results match your current filters or search. Try adjusting them or submit new feedback.</p>
             </div>
         `;
+        return;
     }
+
+    filteredFeedbacks.forEach((fb, index) => {
+        const globalIndex = feedbacks.indexOf(fb);
+        const statusClass = fb.status === "Viewed by Admin" ? "status-viewed" : "status-not-viewed";
+        const priorityClass = fb.priority === "High Priority" ? "priority-high" : '';
+
+        const card = document.createElement("div");
+        card.className = "feedback-card";
+        card.innerHTML = `
+            <h3>${fb.firstName} ${fb.lastName}</h3>
+            <p>${fb.department}</p>
+            <p>${fb.email || 'Anonymous'}</p>
+            <div class="concern">${fb.concern}</div>
+            <div class="status-badge ${statusClass}">
+                <span class="icon">${fb.status === "Viewed by Admin" ? '👁️' : '📌'}</span>
+                ${fb.status}
+            </div>
+            ${fb.priority === "High Priority" ? `<div class="priority-high">⚡ High Priority</div>` : ''}
+            <div class="time">${fb.time}</div>
+        `;
+
+        card.onclick = () => markAsViewed(globalIndex);
+        board.appendChild(card);
+    });
 }
 
-// initial render
+// Initial render
 renderFeedbacks();
+

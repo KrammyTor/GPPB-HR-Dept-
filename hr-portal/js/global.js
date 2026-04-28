@@ -1,18 +1,70 @@
+function ensureSplashScreen() {
+    let splashScreen = document.querySelector(".splash-screen");
+
+    if (splashScreen || !document.body) {
+        return splashScreen;
+    }
+
+    splashScreen = document.createElement("div");
+    splashScreen.className = "splash-screen";
+    splashScreen.innerHTML = `
+        <div class="splash-logo">
+            <img src="../assets/gppb3.png" alt="HR Portal Logo">
+        </div>
+    `;
+
+    document.body.prepend(splashScreen);
+
+    return splashScreen;
+}
+
+function runSplashScreen() {
+    const splashScreen = ensureSplashScreen();
+
+    if (!splashScreen) {
+        return;
+    }
+
+    const navType = performance.getEntriesByType("navigation")[0]?.type;
+    const hasShownSplash = sessionStorage.getItem("hasShownSplash") === "true";
+    const shouldShowSplash = navType === "reload" || !hasShownSplash;
+
+    if (!shouldShowSplash) {
+        splashScreen.style.display = "none";
+        return;
+    }
+
+    const dismissSplash = () => {
+        splashScreen.classList.add("fade-out");
+        document.body.classList.remove("no-scroll");
+
+        window.setTimeout(() => {
+            splashScreen.style.display = "none";
+        }, 800);
+    };
+
+    splashScreen.style.display = "flex";
+    splashScreen.classList.remove("fade-out");
+    document.body.classList.add("no-scroll");
+    sessionStorage.setItem("hasShownSplash", "true");
+
+    window.setTimeout(dismissSplash, 2500);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    runSplashScreen();
 
-    // =========================
-    // NAV ACTIVE STATE
-    // =========================
-    const links = document.querySelectorAll(".nav-link");
+    function setActiveNavLinks() {
+        const links = document.querySelectorAll(".nav-link");
+        let currentPage = window.location.pathname.split("/").pop();
+        if (!currentPage) currentPage = "index.html";
 
-    let currentPage = window.location.pathname.split("/").pop();
-    if (!currentPage) currentPage = "index.html";
-
-    links.forEach(link => {
-        if (link.getAttribute("href") === currentPage) {
-            link.classList.add("active");
-        }
-    });
+        links.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
 
     // =========================
     // FLOATING ICONS (UNUSED FOR NOW)
@@ -78,8 +130,74 @@ document.addEventListener("DOMContentLoaded", () => {
     if (headerContainer) {
         fetch("./components/header.html")
             .then(res => res.text())
-            .then(html => {
-                headerContainer.innerHTML = html;
+            .then(headerHtml => {
+                headerContainer.innerHTML = headerHtml;
+                setActiveNavLinks();
+
+                const topHeader = headerContainer.querySelector(".top-header");
+                const bottomNav = headerContainer.querySelector(".bottom-nav");
+                const navToggle = headerContainer.querySelector(".nav-toggle");
+                const navBackdrop = headerContainer.querySelector(".nav-backdrop");
+                const navLinks = headerContainer.querySelectorAll(".nav-link");
+
+                // Phone sidebar controls
+                const closeMobileNav = () => {
+                    document.body.classList.remove("nav-open");
+                    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+                };
+
+                const openMobileNav = () => {
+                    document.body.classList.add("nav-open");
+                    if (navToggle) navToggle.setAttribute("aria-expanded", "true");
+                };
+
+                if (navToggle) {
+                    navToggle.addEventListener("click", () => {
+                        if (document.body.classList.contains("nav-open")) {
+                            closeMobileNav();
+                        } else {
+                            openMobileNav();
+                        }
+                    });
+                }
+
+                if (navBackdrop) {
+                    navBackdrop.addEventListener("click", closeMobileNav);
+                }
+
+                navLinks.forEach(link => {
+                    link.addEventListener("click", closeMobileNav);
+                });
+
+                // Desktop keeps top-fixed nav behavior; phones pin sidebar to top.
+                const syncFixedNavPosition = () => {
+                    if (!topHeader || !bottomNav) return;
+
+                    if (window.innerWidth <= 768) {
+                        headerContainer.style.paddingBottom = "0px";
+                        bottomNav.style.top = "0px";
+                        return;
+                    }
+
+                    const headerHeight = topHeader.offsetHeight;
+                    const navHeight = bottomNav.offsetHeight;
+
+                    // Keep content below the fixed nav.
+                    headerContainer.style.paddingBottom = `${navHeight}px`;
+
+                    // Nav sits right below visible header; reaches top once header is fully scrolled out.
+                    const navTop = Math.max(headerHeight - window.scrollY, 0);
+                    bottomNav.style.top = `${navTop}px`;
+                };
+
+                window.addEventListener("scroll", syncFixedNavPosition, { passive: true });
+                window.addEventListener("resize", () => {
+                    if (window.innerWidth > 768) {
+                        closeMobileNav();
+                    }
+                    syncFixedNavPosition();
+                });
+                syncFixedNavPosition();
             })
             .catch(err => console.error("Header failed to load:", err));
     }
@@ -97,50 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(err => console.error("Footer failed to load:", err));
     }
-
-    // =========================
-    // SPLASH SCREEN (ONLY ON REFRESH)
-    // =========================
-    const splashScreen = document.querySelector('.splash-screen');
-
-    if (splashScreen) {
-
-        const navType = performance.getEntriesByType("navigation")[0]?.type;
-
-        if (navType === "reload") {
-            splashScreen.classList.remove('fade-out');
-            document.body.classList.add('no-scroll');
-
-            setTimeout(() => {
-                splashScreen.classList.add('fade-out');
-                document.body.classList.remove('no-scroll');
-            }, 2500);
-
-            splashScreen.addEventListener('click', () => {
-                splashScreen.classList.add('fade-out');
-                document.body.classList.remove('no-scroll');
-            });
-
-        } else {
-            splashScreen.style.display = "none";
-        }
-    }
-
-    // =========================
-    // ACTIVE NAV (AFTER LOAD)
-    // =========================
-    setTimeout(() => {
-        const links = document.querySelectorAll(".nav-link");
-
-        let currentPage = window.location.pathname.split("/").pop();
-        if (!currentPage) currentPage = "index.html";
-
-        links.forEach(link => {
-            if (link.getAttribute("href") === currentPage) {
-                link.classList.add("active");
-            }
-        });
-    }, 100);
 
     // =========================
     // TABS SYSTEM

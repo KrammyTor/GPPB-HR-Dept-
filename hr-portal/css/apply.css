@@ -1,0 +1,273 @@
+/* Title header */
+.apply-header {
+    text-align: center;
+    padding: 50px 50px;
+    background: url('/assets/HTPbg.png') center/cover no-repeat;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.apply-header h1 {
+    font-size: 3.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.apply-header p {
+    font-size: 1.4rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: gray;
+}
+
+.apply-header h1,
+.apply-header p {
+    position: relative;
+    z-index: 1;
+}
+
+/* MAIN WRAPPER */
+.apply-wrapper {
+    display: flex;
+    gap: 40px;
+    margin: 40px 2%;
+    width: 96vw;
+    max-width: none;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    justify-content: space-between;
+}
+
+.steps-card, .requirements-card {
+    flex: 1;
+}
+
+/* RIGHT CARD - STEPS */
+.steps-card {
+    flex: 1;
+    background: #e6e6e6;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.steps-card .section-title {
+    order: 0;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.steps-card h2 {
+    margin-top: 0;
+    font-size: 3.2rem;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.section-title div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sub {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.sub {
+    font-size: 15px;
+    color: gray;
+}
+
+/* TIMELINE */
+.timeline {
+    position: relative;
+    margin-left: 20px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 62px;
+    top: 10px;
+    margin-top: 26px;
+    bottom: 70px;
+    border-left: 2px dashed #3498db;
+    z-index: 1;
+}
+
+.timeline-item {
+    background: rgba(255,255,255,0.8);
+    border-radius: 15px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-left: 5px solid #3498db;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.timeline-item p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    line-height: 1.4;
+    margin: 0;
+    flex: 1;
+}
+
+/* STEP CIRCLE */
+.circle {
+    width: 30px;
+    height: 30px;
+    background: #3498db;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    z-index: 1;
+}
+
+/* STEP ICON */
+.step-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-right: 20px;
+    z-index: 1;
+}
+
+/* RIGHT SIDE PANEL */
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* REQUIREMENTS CARD */
+.requirements-card {
+    background: #e6e6e6;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.requirements-card .section-title {
+    order: 0;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.requirements-card h2 {
+    margin-top: 0;
+    font-size: 3.2rem;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+/* REQUIREMENT ITEM */
+.req-item {
+    background: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    padding: 30px 35px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    border-left: 6px solid #e74c3c;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.req-item p {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+    padding-left: 20px;
+}
+
+.req-list {
+    margin-left: 20px;
+}
+
+.req-icon {
+    width: 70px;
+    height: 70px;
+}
+
+/* REQUIREMENT ICON */
+.req-icon {
+    width: 55px;
+    height: 55px;
+}
+
+/* CTA BOX */
+.cta-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    background: #d9e6f2;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* CTA TEXT */
+.cta-text {
+    flex: 1;
+}
+
+/* CHECK ICON */
+.check {
+    background: #2ecc71;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CHECK IMAGE */
+.check-icon {
+    width: 65px;
+    height: 65px;
+}
+
+/* CTA BUTTON */
+.cta-box button {
+    background: #3498db;
+    color: white;
+    border: none;
+    margin-left: 50px;
+    padding: 20px 50px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.cta-box button:hover {
+    background: #2980b9;
+}
