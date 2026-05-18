@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/apply.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/apply.css">
 </head>
 <body>
 <div id="site-header"></div>
@@ -44,11 +44,13 @@
                 <p>Academic Records</p>
             </div>
 
+            <button class="see-more-btn" id="seeMoreBtn">See more details</button>
+
         </div>
 
     </div>
 
-        <!-- RIGHT CARD -->    
+    <!-- RIGHT CARD -->    
     <div class="right-panel">
 
         <div class="steps-card">
@@ -95,7 +97,118 @@
     </div>
 </div>
 
+<!-- POPUP DETAILS -->
+<div class="details-popup" id="detailsPopup">
+    <div class="popup-box">
+
+        <button class="close-popup" id="closePopup">&times;</button>
+
+        <div class="popup-header">
+            <h2>Application Details</h2>
+            <p>Please read the complete application guidelines and requirements below.</p>
+        </div>
+
+        <div class="popup-content">
+
+            <div class="popup-step">
+                <span>1</span>
+                <div>
+                    <p>
+                        The Government Procurement Policy Board – Technical Support Office (GPPB – TSO) adheres to the policy against discrimination based on gender identity, sexual orientation, disabilities, religion, civil status, age, religion, political affiliation, and/or indigenous group membership in the delivery of its recruitment, selection, and placement services.
+                    </p>
+
+                    <p>
+                        Qualified applicants, including persons with disability (PWD), members of indigenous communities, and those from any sexual orientation and gender identities (SOGI), civil status, age, religion, and political affiliation are encouraged to apply online and submit application with complete documents in a PDF format on or before the end of the publication period through the GPPB – TSO Recruitment Portal at:
+                        <a href="https://tinyurl.com/GPPBTSO-2025-Recruitment" target="_blank">https://tinyurl.com/GPPBTSO-2025-Recruitment</a>
+                    </p>
+
+                    <p>
+                        Due to the volume of applications received, only complete applications submitted through the above Portal will be processed. Walk-in applicants will be assisted in uploading their applications on the GPPB – TSO Recruitment Portal.
+                    </p>
+
+                    <h3>Requirements:</h3>
+
+                    <ul>
+                        <li>Application Letter indicating the desired position – plantilla item no. – salary grade – division addressed to:</li>
+                    </ul>
+
+                    <div class="popup-address">
+                        <p>
+                            <strong>ATTY. SOFIA C. YANTO-ABAD</strong><br>
+                            Officer-in-Charge<br>
+                            Government Procurement Policy Board – Technical Support Office<br>
+                            Government Procurement Policy Board – Technical Support Office Building, Commonwealth Avenue, UP Diliman Campus, Quezon City, Philippines 1121
+                        </p>
+                    </div>
+
+                    <ul>
+                        <li>[UPDATED] Personal Data Sheet (PDS)</li>
+                        <li>[UPDATED] Work Experience Sheet (WES)</li>
+                        <li>Authenticated CSC Eligibility/BAR or Board Rating/License</li>
+                        <li>Transcript of Records (TOR) and Diploma</li>
+                        <li>Photocopy of CERTIFICATION issued by Commission on Higher Education that a one-year diploma post-graduate course acquired from a foreign or local institution is equivalent to a master’s degree or a degree obtained from foreign schools is equivalent to a bachelor’s or master’s degree, if applicable</li>
+                        <li>Service Records/Certificate of Employment</li>
+                        <li>Performance Rating in the last two (2) rating period, if applicable</li>
+                    </ul>
+
+                    <p>
+                        Applications with incomplete documents and received after the closing date shall not be entertained. Applications will be considered valid for a period of one (1) year. Only applicants that are shortlisted will be contacted. All information submitted by applicants shall be subject to verification and/or background check.
+                    </p>
+                </div>
+            </div>
+
+            <div class="popup-step">
+                <span>2</span>
+                <div>
+                    <p>
+                        Upon submission of the requirements listed above, applicants shall be evaluated based on the minimum qualification standards of the position. Shortlisted applicants shall be invited to take the Pre-screening examinations via email and/or text message. Applicants will be notified accordingly regarding the results.
+                    </p>
+                </div>
+            </div>
+
+            <div class="popup-step">
+                <span>3</span>
+                <div>
+                    <p>
+                        The applicants who successfully pass the series of evaluation will be invited for an online interview with the Human Resource Merit Promotion and Selection Board (HRMPSB) following the CSC and GPPB-TSO guidelines. The HRMPSB will deliberate the top 5 or less most qualified applicants and will be endorsed to the Appointing Authority.
+                    </p>
+                </div>
+            </div>
+
+            <div class="popup-step">
+                <span>4</span>
+                <div>
+                    <p>
+                        Applicant who is approved for hiring in the GPPB-TSO vacant position will be informed through email, text message, and/or phone call by the HRMO. Applicants who are not considered for the position will be notified accordingly through email.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script src="js/global.js"></script>
+
+<script>
+    const seeMoreBtn = document.getElementById("seeMoreBtn");
+    const detailsPopup = document.getElementById("detailsPopup");
+    const closePopup = document.getElementById("closePopup");
+
+    seeMoreBtn.addEventListener("click", function () {
+        detailsPopup.classList.add("show-popup");
+    });
+
+    closePopup.addEventListener("click", function () {
+        detailsPopup.classList.remove("show-popup");
+    });
+
+    detailsPopup.addEventListener("click", function (event) {
+        if (event.target === detailsPopup) {
+            detailsPopup.classList.remove("show-popup");
+        }
+    });
+</script>
 
 <div id="site-footer"></div>
 

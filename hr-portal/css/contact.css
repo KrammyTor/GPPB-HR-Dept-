@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CONTACT SECTION */
+.contact-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* GRID */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+/* CARD BASE */
+.contact-card {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+/* MAP */
+.map-card iframe {
+    width: 100%;
+    height: 260px;
+    border: none;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    transform: scale(1);
+    transform-origin: center;
+
+}
+
+.map-details h3 {
+    color: #1f3664;
+    margin-bottom: 8px;
+}
+
+/* BUTTON */
+.direction-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.direction-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* INFO */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* NOTICE */
+.contact-notice {
+    margin: 30px 0;
+    padding: 16px;
+    background: #f1f5f9;
+    border-radius: 16px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* STAFF GRID */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.staff-card h3 {
+    margin-bottom: 12px;
+}
+
+.staff-item {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    align-items: flex-start;
+}
+
+.staff-item span {
+    font-size: 25px;
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-card h4 {
+    font-size: 17px;
+    color: #64748b;   /* subtle label */
+    font-weight: 600;
+}
+
+.info-card p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f3664;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-grid {
+        grid-template-columns: 1fr;
+    }
+}

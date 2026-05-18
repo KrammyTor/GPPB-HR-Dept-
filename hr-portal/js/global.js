@@ -169,6 +169,105 @@ document.addEventListener("DOMContentLoaded", () => {
                     link.addEventListener("click", closeMobileNav);
                 });
 
+                // =========================
+                // SEARCH FUNCTIONALITY
+                // =========================
+                const searchInput = headerContainer.querySelector("#searchInput");
+                const searchButton = headerContainer.querySelector("#searchButton");
+                const mobileSearchInput = headerContainer.querySelector("#mobileSearchInput");
+                const mobileSearchButton = headerContainer.querySelector("#mobileSearchButton");
+
+                function searchWebsite(inputElement) {
+                    const searchText = inputElement.value.toLowerCase().trim();
+
+                    if (searchText === "") {
+                        alert("Please enter something to search.");
+                        return;
+                    }
+
+                    const pages = {
+                        "home": "index.html",
+                        "hr portal": "index.html",
+                        "quality policy": "index.html",
+                        "policy": "index.html",
+
+                        "job": "recruitment.html",
+                        "jobs": "recruitment.html",
+                        "job vacancies": "recruitment.html",
+                        "vacancies": "recruitment.html",
+                        "recruitment": "recruitment.html",
+
+                        "apply": "apply.html",
+                        "how to apply": "apply.html",
+                        "application": "apply.html",
+
+                        "internship": "internship.html",
+                        "internships": "internship.html",
+                        "intern": "internship.html",
+
+                        "training": "learning.html",
+                        "trainings": "learning.html",
+                        "course": "learning.html",
+                        "courses": "learning.html",
+
+                        "learning": "learning.html",
+                        "learning and development": "learning.html",
+                        "development": "learning.html",
+
+                        "documents": "forms.html",
+                        "document": "forms.html",
+                        "forms": "forms.html",
+                        "form": "forms.html",
+
+                        "achievements": "rewards.html",
+                        "achievement": "rewards.html",
+                        "rewards": "rewards.html",
+                        "reward": "rewards.html",
+
+                        "feedback": "discussion.html",
+                        "discussion": "discussion.html",
+                        "concern": "discussion.html",
+                        "concerns": "discussion.html",
+
+                        "contact": "contact.html",
+                        "contacts": "contact.html",
+                        "contact us": "contact.html"
+                    };
+
+                    for (let keyword in pages) {
+                        if (searchText.includes(keyword)) {
+                            window.location.href = pages[keyword];
+                            return;
+                        }
+                    }
+
+                    alert("No result found for: " + searchText);
+                }
+
+                if (searchInput && searchButton) {
+                    searchButton.addEventListener("click", function () {
+                        searchWebsite(searchInput);
+                    });
+
+                    searchInput.addEventListener("keypress", function (event) {
+                        if (event.key === "Enter") {
+                            searchWebsite(searchInput);
+                        }
+                    });
+                }
+
+                if (mobileSearchInput && mobileSearchButton) {
+                    mobileSearchButton.addEventListener("click", function () {
+                        searchWebsite(mobileSearchInput);
+                    });
+
+                    mobileSearchInput.addEventListener("keypress", function (event) {
+                        if (event.key === "Enter") {
+                            searchWebsite(mobileSearchInput);
+                        }
+                    });
+                }
+
                 // Desktop keeps top-fixed nav behavior; phones pin sidebar to top.
                 const syncFixedNavPosition = () => {
                     if (!topHeader || !bottomNav) return;
