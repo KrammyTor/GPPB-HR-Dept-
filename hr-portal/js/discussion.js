@@ -1,84 +1,151 @@
-// Modern Discussion Board JS - Enhanced UX with Search
-let currentFilter = "all";
-let searchTerm = '';
-let feedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
+const STORAGE_KEY = "feedbacks";
 
-// Elements
+let searchTerm = "";
+let feedbacks = loadFeedbacks();
+
 const board = document.getElementById("feedbackBoard");
 const modal = document.getElementById("feedbackModal");
+const detailModal = document.getElementById("feedbackDetailModal");
 const openBtn = document.getElementById("openModalBtn");
 const closeBtn = document.getElementById("closeModal");
 const submitBtn = document.getElementById("submitFeedback");
 const globalSearch = document.getElementById("globalSearch");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
+const closeDetailBtn = document.getElementById("closeDetailModal");
+const detailBody = document.getElementById("feedbackDetailBody");
 
 const errorMsg = document.getElementById("errorMsg");
 const successMsg = document.getElementById("successMsg");
 
-// Inputs
 const firstName = document.getElementById("firstName");
 const lastName = document.getElementById("lastName");
 const department = document.getElementById("department");
 const email = document.getElementById("email");
 const concern = document.getElementById("concern");
-const priority = document.getElementById("priority");
+const concernCount = document.getElementById("concernCount");
 
-// Filter buttons
-const filterBtns = document.querySelectorAll(".filter-btn");
-
-filterBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        filterBtns.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        currentFilter = btn.dataset.filter;
-        renderFeedbacks();
-    });
+globalSearch.addEventListener("input", () => {
+    clearSearchBtn.style.display = globalSearch.value.trim() ? "flex" : "none";
 });
 
-// Global Search
-globalSearch.addEventListener("input", (e) => {
-    searchTerm = e.target.value.toLowerCase().trim();
-    renderFeedbacks();
+globalSearch.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        searchFeedbacks();
+    }
+});
+
+clearSearchBtn.addEventListener("click", () => {
+    globalSearch.value = "";
+    searchTerm = "";
+    clearSearchBtn.style.display = "none";
+    renderFeedbacks(false);
+    globalSearch.focus();
 });
 
 function searchFeedbacks() {
-    renderFeedbacks();
+    searchTerm = globalSearch.value.trim().toLowerCase();
+    clearSearchBtn.style.display = globalSearch.value.trim() ? "flex" : "none";
+    renderFeedbacks(true);
 }
 
-// Modal Events
-openBtn.onclick = () => {
+window.searchFeedbacks = searchFeedbacks;
+
+openBtn.onclick = () => openSubmitModal();
+closeBtn.onclick = () => closeSubmitModal();
+closeDetailBtn.onclick = () => closeDetailsModal();
+
+window.addEventListener("click", (e) => {
+    if (e.target === modal) closeSubmitModal();
+    if (e.target === detailModal) closeDetailsModal();
+});
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeSubmitModal();
+        closeDetailsModal();
+    }
+});
+
+concern.addEventListener("input", updateConcernCount);
+
+function openSubmitModal() {
     modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
     resetFormState();
-};
+    updateConcernCount();
+    firstName.focus();
+}
 
-closeBtn.onclick = () => {
+function closeSubmitModal() {
     modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-};
+}
 
-window.onclick = (e) => {
-    if (e.target === modal) {
-        modal.style.display = "none";
-        document.body.style.overflow = "";
-    }
-};
+function openDetailsModal(index) {
+    const fb = feedbacks[index];
+    if (!fb) return;
 
-// Validation (email optional)
+    detailBody.innerHTML = `
+        <div class="detail-grid">
+            <div class="detail-item">
+                <span>Name</span>
+                <strong>${escapeHTML(`${fb.firstName || ""} ${fb.lastName || ""}`.trim() || "Anonymous")}</strong>
+            </div>
+            <div class="detail-item">
+                <span>Department / Field</span>
+                <strong>${escapeHTML(fb.department || "Not provided")}</strong>
+            </div>
+            <div class="detail-item">
+                <span>Email</span>
+                <strong>${escapeHTML(fb.email || "Not provided")}</strong>
+            </div>
+            <div class="detail-item">
+                <span>Date Submitted</span>
+                <strong>${escapeHTML(fb.time || "No date recorded")}</strong>
+            </div>
+        </div>
+
+        <div class="detail-concern">
+            <span>Concern / Feedback</span>
+            <p>${highlightText(fb.concern || "No concern details provided.", searchTerm)}</p>
+        </div>
+    `;
+
+    detailModal.style.display = "flex";
+    detailModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    closeDetailBtn.focus();
+}
+
+function closeDetailsModal() {
+    detailModal.style.display = "none";
+    detailModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+}
+
+function updateConcernCount() {
+    concernCount.textContent = concern.value.length;
+}
+
 function validate() {
     let valid = true;
-    const inputs = [firstName, lastName, department, concern];
+    const requiredInputs = [firstName, lastName, department, concern];
 
-    inputs.forEach(input => {
+    requiredInputs.forEach(input => {
         input.classList.remove("input-error", "input-success");
+
         if (!input.value.trim()) {
             input.classList.add("input-error");
             valid = false;
         }
     });
 
-    // Optional email validation
-    if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+    email.classList.remove("input-error", "input-success");
+
+    if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
         email.classList.add("input-error");
         valid = false;
     }
@@ -86,127 +153,250 @@ function validate() {
     return valid;
 }
 
-// Submit
 submitBtn.onclick = () => {
     resetFormState();
 
     if (!validate()) {
-        errorMsg.textContent = "Please fill all required fields correctly.";
+        errorMsg.textContent = "Please fill in all required fields correctly.";
         errorMsg.style.display = "block";
         return;
     }
 
     const newFeedback = {
+        id: `fb-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
         firstName: firstName.value.trim(),
         lastName: lastName.value.trim(),
         department: department.value.trim(),
         email: email.value.trim(),
         concern: concern.value.trim(),
-        status: "Not Viewed by Admin",
-        priority: priority.value,
-        time: new Date().toLocaleString("en-US", { 
-            year: 'numeric', 
-            month: 'short', 
-            day: 'numeric', 
-            hour: '2-digit', 
-            minute: '2-digit' 
+        createdAt: new Date().toISOString(),
+        time: new Date().toLocaleString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
         })
     };
 
-    feedbacks.unshift(newFeedback); // Add to top
-    localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+    feedbacks.unshift(newFeedback);
+    saveFeedbacks();
 
-    // Success UI
-    successMsg.textContent = "✅ Feedback submitted successfully! Thank you.";
+    successMsg.textContent = "✅ Feedback submitted successfully. Thank you.";
     successMsg.style.display = "block";
-    [firstName, lastName, department, concern, email].forEach(input => input.classList.add("input-success"));
+
+    [firstName, lastName, department, concern, email].forEach(input => {
+        input.classList.add("input-success");
+    });
 
     setTimeout(() => {
-        modal.style.display = "none";
-        document.body.style.overflow = "";
+        closeSubmitModal();
         clearForm();
         resetFormState();
         renderFeedbacks();
-    }, 1500);
+    }, 900);
 };
 
 function resetFormState() {
     errorMsg.style.display = "none";
     successMsg.style.display = "none";
+
     [firstName, lastName, department, email, concern].forEach(input => {
         input.classList.remove("input-error", "input-success");
     });
 }
 
 function clearForm() {
-    firstName.value = lastName.value = department.value = email.value = concern.value = "";
-    priority.value = "Pending";
+    firstName.value = "";
+    lastName.value = "";
+    department.value = "";
+    email.value = "";
+    concern.value = "";
+    updateConcernCount();
 }
 
-// Mark as viewed
-function markAsViewed(index) {
-    if (feedbacks[index].status === "Not Viewed by Admin") {
-        feedbacks[index].status = "Viewed by Admin";
-        localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
-        renderFeedbacks();
+function loadFeedbacks() {
+    try {
+        const storedFeedbacks = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+        if (!Array.isArray(storedFeedbacks)) {
+            return [];
+        }
+
+        return storedFeedbacks.map(fb => ({
+            id: fb.id || `fb-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+            firstName: fb.firstName || "",
+            lastName: fb.lastName || "",
+            department: fb.department || "",
+            email: fb.email || "",
+            concern: fb.concern || "",
+            createdAt: fb.createdAt || "",
+            time: fb.time || "No date recorded"
+        }));
+    } catch (error) {
+        localStorage.removeItem(STORAGE_KEY);
+        return [];
     }
 }
 
-// Main Render Function
-function renderFeedbacks() {
-    board.innerHTML = '';
+function saveFeedbacks() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(feedbacks));
+}
 
-    let filteredFeedbacks = feedbacks.filter(fb => {
-        const matchesFilter = currentFilter === "all" || 
-            (currentFilter === "High Priority" && fb.priority === "High Priority") ||
-            (currentFilter === "Pending" && fb.priority === "Pending") ||
-            (currentFilter === "Viewed" && fb.status === "Viewed by Admin") ||
-            (currentFilter === "Not Viewed" && fb.status === "Not Viewed by Admin");
+function getSearchScore(fb) {
+    if (!searchTerm) return 0;
 
-        const matchesSearch = !searchTerm || 
-            fb.firstName.toLowerCase().includes(searchTerm) ||
-            fb.lastName.toLowerCase().includes(searchTerm) ||
-            fb.department.toLowerCase().includes(searchTerm) ||
-            fb.concern.toLowerCase().includes(searchTerm);
+    const first = (fb.firstName || "").toLowerCase();
+    const last = (fb.lastName || "").toLowerCase();
+    const fullName = `${first} ${last}`.trim();
+    const dept = (fb.department || "").toLowerCase();
+    const mail = (fb.email || "").toLowerCase();
+    const text = (fb.concern || "").toLowerCase();
 
-        return matchesFilter && matchesSearch;
+    let score = 0;
+    const fields = [fullName, first, last, dept, mail, text];
+
+    fields.forEach(field => {
+        if (field.includes(searchTerm)) score += 5;
+        if (field.startsWith(searchTerm)) score += 3;
     });
 
-    if (filteredFeedbacks.length === 0) {
+    return score;
+}
+
+function escapeHTML(value) {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function escapeRegExp(value) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function highlightText(value, term) {
+    const safeValue = escapeHTML(value);
+    const cleanTerm = term.trim();
+
+    if (!cleanTerm) return safeValue;
+
+    const words = cleanTerm
+        .split(/\s+/)
+        .filter(Boolean)
+        .map(escapeRegExp);
+
+    if (!words.length) return safeValue;
+
+    const regex = new RegExp(`(${words.join("|")})`, "gi");
+    return safeValue.replace(regex, `<mark class="search-highlight">$1</mark>`);
+}
+
+function getEmptyStateMessage() {
+    if (feedbacks.length === 0) {
+        return {
+            title: "📭 No feedback yet",
+            message: "Once users submit feedback or concerns, the cards will appear here."
+        };
+    }
+
+    if (searchTerm) {
+        return {
+            title: "🔎 No search found",
+            message: `No feedback matched “${escapeHTML(searchTerm)}”. Try another name, department, email, or concern keyword.`
+        };
+    }
+
+    return {
+        title: "📭 No feedback found",
+        message: "No concern is currently available."
+    };
+}
+
+function scrollToResult() {
+    const target = board.querySelector(".search-match") || board;
+
+    target.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+function renderFeedbacks(shouldScroll = false) {
+    board.innerHTML = "";
+
+    const scoredFeedbacks = feedbacks.map((fb, index) => ({
+        fb,
+        index,
+        score: getSearchScore(fb)
+    }));
+
+    const visibleFeedbacks = searchTerm
+        ? scoredFeedbacks
+            .filter(item => item.score > 0)
+            .sort((a, b) => b.score - a.score || b.index - a.index)
+        : scoredFeedbacks;
+
+    if (visibleFeedbacks.length === 0) {
+        const emptyState = getEmptyStateMessage();
+
         board.innerHTML = `
             <div class="empty-state">
-                <h3>📭 No feedback found</h3>
-                <p>No results match your current filters or search. Try adjusting them or submit new feedback.</p>
+                <h3>${emptyState.title}</h3>
+                <p>${emptyState.message}</p>
             </div>
         `;
+
+        if (shouldScroll) {
+            setTimeout(scrollToResult, 100);
+        }
+
         return;
     }
 
-    filteredFeedbacks.forEach((fb, index) => {
-        const globalIndex = feedbacks.indexOf(fb);
-        const statusClass = fb.status === "Viewed by Admin" ? "status-viewed" : "status-not-viewed";
-        const priorityClass = fb.priority === "High Priority" ? "priority-high" : '';
+    visibleFeedbacks.forEach(({ fb, index, score }) => {
+        const isMatched = searchTerm && score > 0;
 
-        const card = document.createElement("div");
-        card.className = "feedback-card";
+        const card = document.createElement("article");
+        card.className = `feedback-card${isMatched ? " search-match" : ""}`;
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+
         card.innerHTML = `
-            <h3>${fb.firstName} ${fb.lastName}</h3>
-            <p>${fb.department}</p>
-            <p>${fb.email || 'Anonymous'}</p>
-            <div class="concern">${fb.concern}</div>
-            <div class="status-badge ${statusClass}">
-                <span class="icon">${fb.status === "Viewed by Admin" ? '👁️' : '📌'}</span>
-                ${fb.status}
+            <div class="card-topline">
+                <h3>${highlightText(`${fb.firstName || ""} ${fb.lastName || ""}`.trim() || "Anonymous", searchTerm)}</h3>
+                ${isMatched ? `<span class="match-pill">Match</span>` : ""}
             </div>
-            ${fb.priority === "High Priority" ? `<div class="priority-high">⚡ High Priority</div>` : ''}
-            <div class="time">${fb.time}</div>
+
+            <p>${highlightText(fb.department || "No department provided", searchTerm)}</p>
+            <p>${highlightText(fb.email || "Email not provided", searchTerm)}</p>
+
+            <div class="concern">
+                ${highlightText(fb.concern || "No concern details provided.", searchTerm)}
+            </div>
+
+            <div class="time">${escapeHTML(fb.time || "No date recorded")}</div>
         `;
 
-        card.onclick = () => markAsViewed(globalIndex);
+        card.addEventListener("click", () => openDetailsModal(index));
+
+        card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openDetailsModal(index);
+            }
+        });
+
         board.appendChild(card);
     });
+
+    if (shouldScroll) {
+        setTimeout(scrollToResult, 100);
+    }
 }
 
-// Initial render
+saveFeedbacks();
+updateConcernCount();
 renderFeedbacks();
-

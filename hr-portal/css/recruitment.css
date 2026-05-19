@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ================= HERO ================= */
@@ -356,5 +357,174 @@
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+/* BOLD CONDENSED TITLE FONT */
+.internship-hero h1,
+.recruitment-hero h1,
+.careers-hero h1,
+.section-title,
+.section-header h2,
+.recruitment-title,
+.careers-title {
+    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+
+/* ================= FIXES: HERO FONT + JOB BUTTON ALIGNMENT ================= */
+.internship-hero h1 {
+    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+}
+
+.job-listings {
+    align-items: stretch;
+}
+
+.job-card {
+    min-height: 360px;
+}
+
+.job-description {
+    margin-bottom: 20px;
+}
+
+.job-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-deadline {
+    margin-bottom: 24px;
+}
+
+.apply-btn {
+    margin-top: 0;
+}
+
+
+/* ================= INTERNSHIP APPLICATION CARD ================= */
+.internship-application-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 0 20px;
+}
+
+.internship-application-card {
+    background: linear-gradient(135deg, #ffffff 0%, #eef6ff 100%);
+    border-radius: 28px;
+    padding: 34px 38px;
+    box-shadow: 0 22px 70px rgba(0,0,0,0.10);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-top: 6px solid #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+.internship-application-card::before {
+    content: '';
+    position: absolute;
+    inset: auto -80px -120px auto;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(52,152,219,0.12);
+    pointer-events: none;
+}
+
+.internship-application-content {
+    position: relative;
+    z-index: 1;
+}
+
+.internship-kicker {
+    display: inline-block;
+    background: #e8f2ff;
+    color: #1e40af;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 8px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+}
+
+.internship-application-content h2 {
+    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 400 !important;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #1f3664;
+    margin: 0 0 10px;
+}
+
+.internship-application-content p {
+    color: #475569;
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 690px;
+    margin: 0;
+}
+
+.internship-apply-btn {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 230px;
+    padding: 18px 28px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    text-decoration: none;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 17px;
+    box-shadow: 0 15px 40px rgba(52,152,219,0.35);
+    transition: all 0.35s ease;
+}
+
+.internship-apply-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 55px rgba(52,152,219,0.45);
+}
+
+/* Anchor offset so Check Now lands cleanly on Open Positions */
+#open-positions {
+    scroll-margin-top: 130px;
+}
+
+@media (max-width: 768px) {
+    .internship-application-section {
+        padding: 42px 18px 10px;
+    }
+
+    .internship-application-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 28px 22px;
+    }
+
+    .internship-apply-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #open-positions {
+        scroll-margin-top: 110px;
     }
 }

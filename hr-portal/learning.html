@@ -32,7 +32,74 @@
 
     <div class="learning-container">
 
-        <!-- FEATURED PLATFORM -->
+        <!-- LEARNING SHOWCASE SLIDER -->
+        <div class="learning-slider" aria-label="GPPB-TSO learning and development highlights">
+            <div class="learning-slide active">
+                <div class="learning-slide-bg learning-slide-bg-one"></div>
+                <div class="learning-slide-overlay"></div>
+
+                <div class="learning-slide-content">
+                    <span class="learning-slide-kicker">Digital Learning</span>
+                    <h2>Learning Support for Procurement Practitioners</h2>
+                    <p>Explore training platforms, certification programs, and recent capacity development initiatives.</p>
+                </div>
+            </div>
+
+            <div class="learning-slide">
+                <div class="learning-slide-bg learning-slide-bg-two"></div>
+                <div class="learning-slide-overlay"></div>
+
+                <div class="learning-slide-content">
+                    <span class="learning-slide-kicker">Training Programs</span>
+                    <h2>Capacity Development and Training</h2>
+                    <p>Supporting agencies through official procurement learning programs and NGPA-focused workshops.</p>
+                </div>
+            </div>
+
+            <div class="learning-slide">
+                <div class="learning-slide-bg learning-slide-bg-three"></div>
+                <div class="learning-slide-overlay"></div>
+
+                <div class="learning-slide-content">
+                    <span class="learning-slide-kicker">Professionalization</span>
+                    <h2>Certification and Learning Roadmap</h2>
+                    <p>Strengthening procurement competencies through professional standards and digital services.</p>
+                </div>
+            </div>
+
+            <div class="learning-stats">
+                <div class="highlight-box">
+                    <div class="learning-stat-icon">📚</div>
+                    <h3>150+</h3>
+                    <p>GPPB-recognized trainers nationwide</p>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="learning-stat-icon">💻</div>
+                    <h3>2023</h3>
+                    <p>Online training request system implemented</p>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="learning-stat-icon">🎓</div>
+                    <h3>2026</h3>
+                    <p>Professionalization Roadmap launched</p>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="learning-stat-icon">✅</div>
+                    <h3>RA 12009</h3>
+                    <p>NGPA-focused training and compliance programs</p>
+                </div>
+            </div>
+
+            <div class="learning-slider-dots" aria-label="Learning slider controls">
+                <button class="learning-slider-dot active" type="button" aria-label="Show slide 1"></button>
+                <button class="learning-slider-dot" type="button" aria-label="Show slide 2"></button>
+                <button class="learning-slider-dot" type="button" aria-label="Show slide 3"></button>
+            </div>
+        </div>
+
         <div class="learning-featured-card">
             <div class="learning-featured-icon">💻</div>
 
@@ -140,30 +207,7 @@
 
         </div>
 
-        <!-- BOTTOM HIGHLIGHTS -->
-        <div class="learning-highlights">
 
-            <div class="highlight-box">
-                <h3>150+</h3>
-                <p>GPPB-recognized trainers nationwide</p>
-            </div>
-
-            <div class="highlight-box">
-                <h3>2023</h3>
-                <p>Online training request system implemented</p>
-            </div>
-
-            <div class="highlight-box">
-                <h3>2026</h3>
-                <p>Professionalization Roadmap launched</p>
-            </div>
-
-            <div class="highlight-box">
-                <h3>RA 12009</h3>
-                <p>NGPA-focused training and compliance programs</p>
-            </div>
-
-        </div>
 
     </div>
 
@@ -172,6 +216,50 @@
 <div id="site-footer"></div>
 
 <script src="js/global.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".learning-slide");
+    const dots = document.querySelectorAll(".learning-slider-dot");
+
+    if (!slides.length || !dots.length) return;
+
+    let currentSlide = 0;
+    let slideTimer;
+
+    function showSlide(index) {
+        slides[currentSlide].classList.remove("active");
+        dots[currentSlide].classList.remove("active");
+
+        currentSlide = index;
+
+        slides[currentSlide].classList.add("active");
+        dots[currentSlide].classList.add("active");
+    }
+
+    function nextSlide() {
+        showSlide((currentSlide + 1) % slides.length);
+    }
+
+    function startSlider() {
+        slideTimer = setInterval(nextSlide, 5000);
+    }
+
+    function resetSlider() {
+        clearInterval(slideTimer);
+        startSlider();
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            showSlide(index);
+            resetSlider();
+        });
+    });
+
+    startSlider();
+});
+</script>
 
 </body>
 </html>

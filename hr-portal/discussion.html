@@ -10,49 +10,53 @@
 <body>
 <div id="site-header"></div>
 
-<!-- Hero Section -->
 <section class="discussion-hero">
     <div class="hero-content">
-        <h1>Feedback & Concerns</h1>
-        <p>Share your thoughts, submit feedback or report concerns. Your input helps us improve.</p>
-        <div class="hero-search">
-            <input type="text" id="globalSearch" placeholder="🔍 Search feedback by name, department, or concern...">
-            <button class="search-btn" onclick="searchFeedbacks()">Search</button>
+        <h1>FEEDBACK AND CONCERNS</h1>
+        <p>Share your feedback, report concerns, and help improve the GPPB-TSO HR services.</p>
+
+        <div class="hero-search" role="search">
+            <div class="search-input-wrap">
+                <input type="text" id="globalSearch" placeholder="🔍 Search by name, department, email, or concern..." autocomplete="off">
+                <button id="clearSearchBtn" class="clear-search-btn" type="button" aria-label="Clear search">×</button>
+            </div>
+            <button class="search-btn" type="button" onclick="searchFeedbacks()">Search</button>
         </div>
     </div>
 </section>
 
+<div class="shenanigans">
+    <div class="floating-icon" data-icon="👋"></div>
+    <div class="floating-icon" data-icon="📊"></div>
+    <div class="floating-icon" data-icon="💼"></div>
+    <div class="floating-icon" data-icon="📈"></div>
+    <canvas id="particles-canvas"></canvas>
+</div>
+
+
 <div class="page-container">
-    <!-- Info Section -->
-    <div class="info-section">
-        <h3>How to Use Discussion Board</h3>
-        <p><strong>Welcome!</strong> Click <strong>"Submit Feedback"</strong> (floating purple button) to share anonymously. Use filters to view by status/priority. Click any card to mark as viewed.</p>
-    </div>
+    <section class="info-section" aria-labelledby="discussionGuideTitle">
+        <div class="info-section-header">
+            <span class="info-icon" aria-hidden="true">💬</span>
+            <div>
+                <h3 id="discussionGuideTitle">How to Use the Discussion Board</h3>
+                <p>Submit your feedback or concern using the <b>Submit Feedback</b> button. You can also search submitted concerns by name, department, email, or keyword.</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Filter Tabs -->
-    <div class="filter-tabs">
-        <button class="filter-btn active" data-filter="all">All Feedback</button>
-        <button class="filter-btn" data-filter="High Priority">High Priority</button>
-        <button class="filter-btn" data-filter="Pending">Pending</button>
-        <button class="filter-btn" data-filter="Viewed">Viewed</button>
-        <button class="filter-btn" data-filter="Not Viewed">Not Viewed</button>
-    </div>
-
-    <!-- Board -->
     <div class="board-backdrop">
-        <div id="feedbackBoard" class="feedback-board"></div>
+        <div id="feedbackBoard" class="feedback-board" aria-live="polite"></div>
     </div>
 </div>
 
-<!-- Floating Button -->
-<button id="openModalBtn" class="floating-btn">
+<button id="openModalBtn" class="floating-btn" type="button">
     <span>📝 Submit Feedback</span>
 </button>
 
-<!-- Modal -->
-<div id="feedbackModal" class="modal">
-    <div class="modal-content">
-        <h2>Submit Feedback & Concern</h2>
+<div id="feedbackModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="submitFeedbackTitle">
+        <h2 id="submitFeedbackTitle">Submit Feedback</h2>
 
         <p id="errorMsg" class="error-msg"></p>
         <p id="successMsg" class="success-msg"></p>
@@ -62,26 +66,37 @@
             <input type="text" id="lastName" placeholder="Last Name" maxlength="30">
         </div>
 
-        <input type="text" id="department" placeholder="Department / Field">
-        <input type="email" id="email" placeholder="Email (optional)">
-        <textarea id="concern" placeholder="Describe your concern or feedback in detail..."></textarea>
+        <input type="text" id="department" placeholder="Department / Field" maxlength="80">
+        <input type="email" id="email" placeholder="Email (optional)" maxlength="100">
 
-        <select id="priority">
-            <option value="Pending">Pending</option>
-            <option value="High Priority">High Priority</option>
-        </select>
+        <textarea id="concern" placeholder="Describe your concern or feedback in detail..." maxlength="1000"></textarea>
+
+        <div class="character-count">
+            <span id="concernCount">0</span>/1000 characters
+        </div>
 
         <div class="modal-buttons">
-            <button id="submitFeedback" class="btn-submit">Submit Feedback</button>
-            <button id="closeModal" class="btn-cancel">Cancel</button>
+            <button id="submitFeedback" class="btn-submit" type="button">Submit Feedback</button>
+            <button id="closeModal" class="btn-cancel" type="button">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="feedbackDetailModal" class="modal" aria-hidden="true">
+    <div class="modal-content detail-modal-content" role="dialog" aria-modal="true" aria-labelledby="feedbackDetailTitle">
+        <h2 id="feedbackDetailTitle">Feedback Details</h2>
+
+        <div id="feedbackDetailBody" class="feedback-detail-body"></div>
+
+        <div class="modal-buttons">
+            <button id="closeDetailModal" class="btn-cancel" type="button">Close</button>
         </div>
     </div>
 </div>
 
 <div id="site-footer"></div>
-
 <script src="js/global.js"></script>
 <script src="js/discussion.js"></script>
+
 </body>
 </html>
-

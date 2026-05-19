@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rewards</title>
-    
+
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/rewards.css">
 </head>
@@ -13,42 +13,78 @@
 
 <section class="rewards-hero">
     <div class="hero-content">
-        <h1>Rewards & Recognition</h1>
+        <h1>REWARDS AND RECOGNITION</h1>
         <p>See the achievements of GPPB-TSO from various events</p>
     </div>
 </section>
 
 <section class="achievements-section">
-    
     <div class="achievements-container">
-        <div class="section-header">
-            <h2>Major Achievements</h2>
-            <p>Key accomplishments of GPPB-TSO as of 2026</p>
-        </div>
 
-        <div class="achievement-stats">
-            <div class="stat-card">
-                <div class="stat-icon">🏛️</div>
-                <h3>RA 12009</h3>
-                <p>New Government Procurement Act enacted</p>
+        <div class="achievement-slider" aria-label="GPPB-TSO achievement highlights">
+            <div class="achievement-slide active">
+                <div class="slide-bg slide-bg-one"></div>
+                <div class="slide-overlay"></div>
+
+                <div class="slide-content">
+                    <span class="slide-kicker">Featured Milestone</span>
+                    <h2>Major Achievements</h2>
+                    <p>Key accomplishments of GPPB-TSO as of 2026</p>
+                </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">💻</div>
-                <h3>12 Aug 2024</h3>
-                <p>Procurement Observer's Portal launched</p>
+            <div class="achievement-slide">
+                <div class="slide-bg slide-bg-two"></div>
+                <div class="slide-overlay"></div>
+
+                <div class="slide-content">
+                    <span class="slide-kicker">Policy Reform</span>
+                    <h2>RA 12009 Enactment</h2>
+                    <p>Supporting stronger, more transparent, and modernized government procurement.</p>
+                </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">✅</div>
-                <h3>3 Years</h3>
-                <p>COA Unmodified Opinion received consecutively</p>
+            <div class="achievement-slide">
+                <div class="slide-bg slide-bg-three"></div>
+                <div class="slide-overlay"></div>
+
+                <div class="slide-content">
+                    <span class="slide-kicker">Quality & Innovation</span>
+                    <h2>Recognition and Excellence</h2>
+                    <p>Highlighting digitalization, audit excellence, and quality management milestones.</p>
+                </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">📜</div>
-                <h3>ISO 9001:2015</h3>
-                <p>Certified quality management system</p>
+            <div class="achievement-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🏛️</div>
+                    <h3>RA 12009</h3>
+                    <p>New Government Procurement Act enacted</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💻</div>
+                    <h3>12 Aug 2024</h3>
+                    <p>Procurement Observer's Portal launched</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <h3>3 Years</h3>
+                    <p>COA Unmodified Opinion received consecutively</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📜</div>
+                    <h3>ISO 9001:2015</h3>
+                    <p>Certified quality management system</p>
+                </div>
+            </div>
+
+            <div class="slider-dots" aria-label="Achievement slider controls">
+                <button class="slider-dot active" type="button" aria-label="Show slide 1"></button>
+                <button class="slider-dot" type="button" aria-label="Show slide 2"></button>
+                <button class="slider-dot" type="button" aria-label="Show slide 3"></button>
             </div>
         </div>
 
@@ -56,9 +92,9 @@
             <div class="featured-badge">Featured Achievement</div>
             <h3>Enactment of the New Government Procurement Act (RA 12009)</h3>
             <p>
-                The GPPB-TSO spearheaded the development of the New Government Procurement Act (NGPA), 
-                which was signed in July 2024 and took effect in August 2024. Its Implementing Rules 
-                and Regulations (IRR) followed in February 2025, marking a major reform milestone 
+                The GPPB-TSO spearheaded the development of the New Government Procurement Act (NGPA),
+                which was signed in July 2024 and took effect in August 2024. Its Implementing Rules
+                and Regulations (IRR) followed in February 2025, marking a major reform milestone
                 in the Philippine procurement system.
             </p>
         </div>
@@ -135,10 +171,52 @@
     <canvas id="particles-canvas"></canvas>
 </div>
 
+<div id="site-footer"></div>
 <script src="js/global.js"></script>
 
-<div id="site-footer"></div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".achievement-slide");
+    const dots = document.querySelectorAll(".slider-dot");
+
+    if (!slides.length || !dots.length) return;
+
+    let currentSlide = 0;
+    let slideTimer;
+
+    function showSlide(index) {
+        slides[currentSlide].classList.remove("active");
+        dots[currentSlide].classList.remove("active");
+
+        currentSlide = index;
+
+        slides[currentSlide].classList.add("active");
+        dots[currentSlide].classList.add("active");
+    }
+
+    function nextSlide() {
+        showSlide((currentSlide + 1) % slides.length);
+    }
+
+    function startSlider() {
+        slideTimer = setInterval(nextSlide, 5000);
+    }
+
+    function resetSlider() {
+        clearInterval(slideTimer);
+        startSlider();
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            showSlide(index);
+            resetSlider();
+        });
+    });
+
+    startSlider();
+});
+</script>
 
 </body>
 </html>
-

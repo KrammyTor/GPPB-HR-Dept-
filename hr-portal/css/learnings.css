@@ -435,3 +435,1011 @@
         font-size: 38px;
     }
 }
+
+/* LEARNING SHOWCASE SLIDER FIX */
+.learning-section {
+    padding-top: 64px;
+}
+
+.learning-showcase-slider {
+    width: min(94vw, 1500px);
+    margin: 0 auto 64px;
+    position: relative;
+}
+
+.learning-showcase-bg {
+    min-height: 510px;
+    border-radius: 32px;
+    padding: 72px 64px 34px;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background:
+        linear-gradient(135deg, rgba(15, 14, 107, 0.96) 0%, rgba(31, 54, 100, 0.88) 48%, rgba(52, 152, 219, 0.82) 100%),
+        url("../assets/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 30px 80px rgba(15, 30, 80, 0.24);
+}
+
+.learning-showcase-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 22%, rgba(116, 179, 206, 0.26), transparent 35%),
+        linear-gradient(90deg, rgba(255,255,255,0.05), transparent);
+    animation: showcaseGlow 8s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+.learning-showcase-bg::after {
+    content: "";
+    position: absolute;
+    width: 540px;
+    height: 540px;
+    right: -180px;
+    bottom: -210px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    filter: blur(2px);
+    z-index: 0;
+}
+
+.showcase-badge,
+.learning-showcase-bg h2,
+.learning-showcase-bg > p,
+.showcase-dots,
+.showcase-highlight-panel {
+    position: relative;
+    z-index: 2;
+}
+
+.showcase-badge {
+    display: inline-flex;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 22px;
+    backdrop-filter: blur(12px);
+}
+
+.learning-showcase-bg h2 {
+    max-width: 760px;
+    font-size: clamp(42px, 5vw, 72px);
+    line-height: 1.03;
+    letter-spacing: -0.04em;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.learning-showcase-bg > p {
+    max-width: 650px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.showcase-dots {
+    position: absolute;
+    right: 48px;
+    top: 44px;
+    display: flex;
+    gap: 10px;
+}
+
+.showcase-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.showcase-dots span:nth-child(2) {
+    width: 34px;
+    background: rgba(255, 255, 255, 0.88);
+}
+
+.showcase-highlight-panel {
+    position: absolute;
+    left: 44px;
+    right: 44px;
+    bottom: 36px;
+    padding: 18px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.20);
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.showcase-highlight-panel .learning-highlights {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.showcase-highlight-panel .highlight-box {
+    min-height: 126px;
+    padding: 24px 18px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0 18px 35px rgba(12, 36, 83, 0.13);
+    backdrop-filter: blur(10px);
+}
+
+.showcase-highlight-panel .highlight-box::before {
+    height: 5px;
+    background: linear-gradient(90deg, #3498db, #34c77b);
+}
+
+.showcase-highlight-panel .highlight-box h3 {
+    font-size: clamp(28px, 3vw, 40px);
+    color: #0f0e6b;
+    margin-bottom: 10px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+}
+
+.showcase-highlight-panel .highlight-box p {
+    color: #5d6f8d;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+/* Hide only the old center intro if it exists in older versions */
+.learning-intro,
+.learning-overview,
+.learning-header {
+    display: none;
+}
+
+@keyframes showcaseGlow {
+    from {
+        opacity: 0.72;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@media (max-width: 1024px) {
+    .learning-showcase-bg {
+        min-height: 620px;
+        padding: 56px 34px 34px;
+    }
+
+    .showcase-highlight-panel .learning-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .learning-showcase-slider {
+        width: calc(100% - 28px);
+    }
+
+    .learning-showcase-bg {
+        min-height: 780px;
+        padding: 44px 22px 24px;
+        border-radius: 24px;
+    }
+
+    .learning-showcase-bg h2 {
+        font-size: 38px;
+    }
+
+    .showcase-highlight-panel {
+        left: 18px;
+        right: 18px;
+        bottom: 20px;
+    }
+
+    .showcase-highlight-panel .learning-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .showcase-dots {
+        right: 28px;
+        top: 28px;
+    }
+}
+
+
+/* =========================================================
+   COPIED ACHIEVEMENTS SLIDER STYLE FOR LEARNING PAGE
+   ========================================================= */
+.learning-section {
+    padding: 26px 20px 80px !important;
+}
+
+.learning-container {
+    max-width: 1320px !important;
+    margin: 0 auto;
+}
+
+.learning-showcase-slider,
+.learning-showcase-bg,
+.showcase-highlight-panel,
+.showcase-dots {
+    display: none !important;
+}
+
+.learning-slider {
+    min-height: 485px;
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto 42px;
+    width: min(100%, 1320px);
+    box-shadow: 0 30px 80px rgba(15, 14, 107, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    isolation: isolate;
+}
+
+.learning-slider::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 88% 18%, rgba(255,255,255,0.5) 0 3px, transparent 4px),
+        radial-gradient(circle at 92% 72%, rgba(52,152,219,0.55) 0 3px, transparent 4px),
+        radial-gradient(circle at 77% 58%, rgba(15,14,107,0.35) 0 2px, transparent 3px),
+        radial-gradient(circle at 12% 30%, rgba(255,255,255,0.35) 0 2px, transparent 3px);
+    background-size: 180px 160px;
+    opacity: 0.65;
+}
+
+.learning-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.7s ease;
+    animation: none !important;
+    transform: none !important;
+}
+
+.learning-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.learning-slide-bg,
+.learning-slide-overlay {
+    position: absolute;
+    inset: 0;
+}
+
+.learning-slide-bg {
+    transform: scale(1.05);
+    transition: transform 5s ease;
+}
+
+.learning-slide.active .learning-slide-bg {
+    transform: scale(1);
+}
+
+.learning-slide-bg-one {
+    background:
+        linear-gradient(135deg, rgba(15,14,107,0.88), rgba(31,54,100,0.55), rgba(52,152,219,0.35)),
+        url('../assets/bg.jpg') center/cover no-repeat;
+}
+
+.learning-slide-bg-two {
+    background:
+        linear-gradient(135deg, rgba(31,54,100,0.9), rgba(52,152,219,0.55), rgba(39,174,96,0.4)),
+        url('../assets/bg.jpg') center/cover no-repeat;
+}
+
+.learning-slide-bg-three {
+    background:
+        linear-gradient(135deg, rgba(15,14,107,0.85), rgba(41,128,185,0.62), rgba(234,242,255,0.25)),
+        url('../assets/bg.jpg') center/cover no-repeat;
+}
+
+.learning-slide-overlay {
+    background:
+        linear-gradient(180deg, rgba(4, 8, 41, 0.1) 0%, rgba(4, 8, 41, 0.25) 45%, rgba(4, 8, 41, 0.55) 100%),
+        radial-gradient(circle at 15% 22%, rgba(255,255,255,0.16), transparent 34%);
+}
+
+.learning-slide-content {
+    position: relative;
+    z-index: 6;
+    max-width: 780px;
+    padding: 72px 64px 210px;
+    color: white;
+}
+
+.learning-slide-kicker {
+    display: inline-flex;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    backdrop-filter: blur(14px);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.learning-slide-content h2 {
+    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    font-size: clamp(44px, 6vw, 72px);
+    font-weight: 400 !important;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: white;
+    margin: 0 0 14px;
+    line-height: 0.95;
+    text-shadow: 0 16px 34px rgba(0,0,0,0.24);
+}
+
+.learning-slide-content p {
+    max-width: 620px;
+    color: rgba(255,255,255,0.9);
+    font-size: clamp(17px, 2vw, 21px);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.learning-slider-dots {
+    position: absolute;
+    right: 34px;
+    bottom: 30px;
+    z-index: 8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.learning-slider-dot {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.52);
+    transition: all 0.25s ease;
+}
+
+.learning-slider-dot.active {
+    width: 34px;
+    background: #ffffff;
+}
+
+.learning-stats {
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: 34px;
+    z-index: 7;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.learning-stats .highlight-box {
+    background: rgba(255, 255, 255, 0.22) !important;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-radius: 24px;
+    padding: 24px 18px;
+    text-align: center;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.36);
+    transition: all 0.35s ease;
+    min-height: auto;
+}
+
+.learning-stats .highlight-box:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.32) !important;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.24);
+}
+
+.learning-stats .highlight-box::before {
+    display: none !important;
+}
+
+.learning-stats .highlight-box h3 {
+    font-size: 25px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 8px;
+    text-shadow: 0 10px 22px rgba(0,0,0,0.22);
+    letter-spacing: 0;
+}
+
+.learning-stats .highlight-box p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.55;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .learning-slider {
+        min-height: 650px;
+    }
+
+    .learning-slide-content {
+        padding: 56px 34px 330px;
+    }
+
+    .learning-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .learning-section {
+        padding: 20px 16px 60px !important;
+    }
+
+    .learning-slider {
+        min-height: 760px;
+        border-radius: 24px;
+    }
+
+    .learning-slide-content {
+        padding: 44px 22px 430px;
+    }
+
+    .learning-slide-content h2 {
+        font-size: 38px;
+    }
+
+    .learning-stats {
+        left: 18px;
+        right: 18px;
+        bottom: 62px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .learning-stats .highlight-box {
+        padding: 18px 16px;
+    }
+
+    .learning-stats .highlight-box h3 {
+        font-size: 22px;
+    }
+
+    .learning-stats .highlight-box p {
+        font-size: 13px;
+    }
+
+    .learning-slider-dots {
+        left: 0;
+        right: 0;
+        bottom: 22px;
+        justify-content: center;
+    }
+}
+
+
+/* =========================================================
+   FINAL ALIGNMENT: MATCH ACHIEVEMENTS HERO SLIDER SPACING
+   Slider width is independent; content below keeps normal width.
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.discussion-hero h1 {
+    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+}
+
+.learning-section {
+    padding: 28px 36px 80px !important;
+}
+
+.learning-container {
+    max-width: 1200px !important;
+    width: 100%;
+    margin: 0 auto !important;
+}
+
+.learning-slider {
+    width: min(88vw, 1480px) !important;
+    max-width: none !important;
+    min-height: 560px !important;
+    border-radius: 32px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 auto 42px !important;
+    box-shadow: 0 30px 80px rgba(15, 14, 107, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    isolation: isolate !important;
+}
+
+.learning-slide-content {
+    position: relative !important;
+    z-index: 6 !important;
+    max-width: 780px !important;
+    padding: 72px 64px 210px !important;
+    color: white !important;
+}
+
+.learning-slide-content h2 {
+    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    font-size: clamp(44px, 6vw, 72px) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    color: white !important;
+    margin: 0 0 14px !important;
+    line-height: 0.95 !important;
+    text-shadow: 0 16px 34px rgba(0,0,0,0.24) !important;
+}
+
+.learning-slide-content p {
+    max-width: 620px !important;
+    color: rgba(255,255,255,0.9) !important;
+    font-size: clamp(17px, 2vw, 21px) !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
+}
+
+.learning-stats {
+    position: absolute !important;
+    left: 34px !important;
+    right: 34px !important;
+    bottom: 34px !important;
+    z-index: 7 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 18px !important;
+}
+
+.learning-stats .highlight-box {
+    background: rgba(255, 255, 255, 0.22) !important;
+    backdrop-filter: blur(22px) !important;
+    -webkit-backdrop-filter: blur(22px) !important;
+    border-radius: 24px !important;
+    padding: 24px 18px !important;
+    text-align: center !important;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18) !important;
+    border: 1px solid rgba(255,255,255,0.36) !important;
+    transition: all 0.35s ease !important;
+    min-height: auto !important;
+}
+
+.learning-slider-dots {
+    position: absolute !important;
+    right: 34px !important;
+    bottom: 30px !important;
+    z-index: 8 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.learning-featured-card,
+.learning-grid {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.learning-featured-card {
+    margin-bottom: 36px !important;
+}
+
+@media (max-width: 1024px) {
+    .learning-slider {
+        min-height: 700px !important;
+    }
+
+    .learning-slide-content {
+        padding: 56px 34px 300px !important;
+    }
+
+    .learning-stats {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .learning-section {
+        padding: 24px 18px 60px !important;
+    }
+
+    .learning-slider {
+        width: 100% !important;
+        min-height: 850px !important;
+        border-radius: 24px !important;
+        left: 0 !important;
+        transform: none !important;
+    }
+
+    .learning-slide-content {
+        padding: 44px 22px 520px !important;
+    }
+
+    .learning-slide-content h2 {
+        font-size: 38px !important;
+    }
+
+    .learning-stats {
+        left: 18px !important;
+        right: 18px !important;
+        bottom: 62px !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .learning-stats .highlight-box {
+        padding: 18px 16px !important;
+    }
+
+    .learning-stats .highlight-box h3 {
+        font-size: 22px !important;
+    }
+
+    .learning-stats .highlight-box p {
+        font-size: 13px !important;
+    }
+
+    .learning-slider-dots {
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 22px !important;
+        justify-content: center !important;
+    }
+}
+
+
+/* =========================================================
+   FINAL: MATCH REWARDS / ACHIEVEMENTS HERO SLIDER REFERENCE
+   Only the learning hero slider is made independent and aligned.
+   Lower cards keep their own 1200px content width.
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.discussion-hero h1,
+.learning-slide-content h2 {
+    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+}
+
+.learning-section {
+    padding: 28px 36px 80px !important;
+    background: linear-gradient(135deg, #f8fafc 0%, #eaf2ff 100%) !important;
+    position: relative !important;
+}
+
+.learning-container {
+    max-width: 1200px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.learning-showcase-slider,
+.learning-showcase-bg,
+.showcase-highlight-panel,
+.showcase-dots {
+    display: none !important;
+}
+
+.learning-slider {
+    width: min(88vw, 1480px) !important;
+    max-width: none !important;
+    min-height: 560px !important;
+    border-radius: 32px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 auto 42px !important;
+    box-shadow: 0 30px 80px rgba(15, 14, 107, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    isolation: isolate !important;
+}
+
+.learning-slider::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+    background-image:
+        radial-gradient(circle at 88% 18%, rgba(255,255,255,0.5) 0 3px, transparent 4px),
+        radial-gradient(circle at 92% 72%, rgba(52,152,219,0.55) 0 3px, transparent 4px),
+        radial-gradient(circle at 77% 58%, rgba(15,14,107,0.35) 0 2px, transparent 3px),
+        radial-gradient(circle at 12% 30%, rgba(255,255,255,0.35) 0 2px, transparent 3px) !important;
+    background-size: 180px 160px !important;
+    opacity: 0.65 !important;
+}
+
+.learning-slide {
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.7s ease !important;
+    animation: none !important;
+    transform: none !important;
+}
+
+.learning-slide.active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.learning-slide-bg,
+.learning-slide-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+}
+
+.learning-slide-bg {
+    transform: scale(1.05) !important;
+    transition: transform 5s ease !important;
+}
+
+.learning-slide.active .learning-slide-bg {
+    transform: scale(1) !important;
+}
+
+.learning-slide-bg-one {
+    background:
+        linear-gradient(135deg, rgba(15,14,107,0.88), rgba(31,54,100,0.55), rgba(52,152,219,0.35)),
+        url('../assets/bg.jpg') center/cover no-repeat !important;
+}
+
+.learning-slide-bg-two {
+    background:
+        linear-gradient(135deg, rgba(31,54,100,0.9), rgba(52,152,219,0.55), rgba(39,174,96,0.4)),
+        url('../assets/bg.jpg') center/cover no-repeat !important;
+}
+
+.learning-slide-bg-three {
+    background:
+        linear-gradient(135deg, rgba(15,14,107,0.85), rgba(41,128,185,0.62), rgba(234,242,255,0.25)),
+        url('../assets/bg.jpg') center/cover no-repeat !important;
+}
+
+.learning-slide-overlay {
+    background:
+        linear-gradient(180deg, rgba(4, 8, 41, 0.1) 0%, rgba(4, 8, 41, 0.25) 45%, rgba(4, 8, 41, 0.55) 100%),
+        radial-gradient(circle at 15% 22%, rgba(255,255,255,0.16), transparent 34%) !important;
+}
+
+.learning-slide-content {
+    position: relative !important;
+    z-index: 6 !important;
+    max-width: 1120px !important;
+    padding: 72px 64px 220px !important;
+    color: white !important;
+}
+
+.learning-slide-kicker {
+    display: inline-flex !important;
+    padding: 9px 16px !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, 0.34) !important;
+    backdrop-filter: blur(14px) !important;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    margin-bottom: 18px !important;
+}
+
+.learning-slide-content h2 {
+    max-width: 1050px !important;
+    font-size: clamp(44px, 5.2vw, 72px) !important;
+    color: white !important;
+    margin: 0 0 14px !important;
+    line-height: 0.95 !important;
+    text-shadow: 0 16px 34px rgba(0,0,0,0.24) !important;
+}
+
+.learning-slide-content p {
+    max-width: 980px !important;
+    color: rgba(255,255,255,0.9) !important;
+    font-size: clamp(17px, 2vw, 21px) !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
+}
+
+.learning-stats {
+    position: absolute !important;
+    left: 34px !important;
+    right: 34px !important;
+    bottom: 34px !important;
+    z-index: 7 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 18px !important;
+}
+
+.learning-stats .highlight-box {
+    background: rgba(255, 255, 255, 0.22) !important;
+    backdrop-filter: blur(22px) !important;
+    -webkit-backdrop-filter: blur(22px) !important;
+    border-radius: 24px !important;
+    padding: 24px 18px !important;
+    text-align: center !important;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18) !important;
+    border: 1px solid rgba(255,255,255,0.36) !important;
+    transition: all 0.35s ease !important;
+    min-height: auto !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.learning-stats .highlight-box::before {
+    display: none !important;
+}
+
+.learning-stats .highlight-box:hover {
+    transform: translateY(-8px) !important;
+    background: rgba(255, 255, 255, 0.32) !important;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.24) !important;
+}
+
+.learning-stat-icon {
+    display: block !important;
+    font-size: 32px !important;
+    line-height: 1 !important;
+    margin: 0 0 12px !important;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.18)) !important;
+}
+
+.learning-stats .highlight-box h3 {
+    font-size: 25px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    margin: 0 0 8px !important;
+    text-shadow: 0 10px 22px rgba(0,0,0,0.22) !important;
+    letter-spacing: 0 !important;
+}
+
+.learning-stats .highlight-box p {
+    font-size: 14px !important;
+    color: rgba(255,255,255,0.9) !important;
+    line-height: 1.55 !important;
+    margin: 0 !important;
+}
+
+.learning-slider-dots {
+    position: absolute !important;
+    right: 34px !important;
+    bottom: 30px !important;
+    z-index: 8 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.learning-slider-dot {
+    width: 12px !important;
+    height: 12px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    cursor: pointer !important;
+    background: rgba(255, 255, 255, 0.52) !important;
+    transition: all 0.25s ease !important;
+}
+
+.learning-slider-dot.active {
+    width: 34px !important;
+    background: #ffffff !important;
+}
+
+.learning-featured-card,
+.learning-grid {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (max-width: 1024px) {
+    .learning-slider {
+        min-height: 700px !important;
+    }
+
+    .learning-slide-content {
+        padding: 56px 34px 300px !important;
+    }
+
+    .learning-stats {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .learning-section {
+        padding: 24px 18px 60px !important;
+    }
+
+    .learning-slider {
+        width: 100% !important;
+        min-height: 850px !important;
+        border-radius: 24px !important;
+        left: 0 !important;
+        transform: none !important;
+    }
+
+    .learning-slide-content {
+        padding: 44px 22px 520px !important;
+    }
+
+    .learning-slide-content h2 {
+        font-size: 38px !important;
+    }
+
+    .learning-stats {
+        left: 18px !important;
+        right: 18px !important;
+        bottom: 62px !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .learning-stats .highlight-box {
+        padding: 18px 16px !important;
+    }
+
+    .learning-stats .highlight-box h3 {
+        font-size: 22px !important;
+    }
+
+    .learning-stats .highlight-box p {
+        font-size: 13px !important;
+    }
+
+    .learning-slider-dots {
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 22px !important;
+        justify-content: center !important;
+    }
+}

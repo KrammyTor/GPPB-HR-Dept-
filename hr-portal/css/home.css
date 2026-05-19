@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 .hero {
     position: relative;
     width: 100%;
@@ -361,3 +362,23 @@
         border-radius: 8px;
     }
 }
+
+/* HOME TITLE FONT FIX */
+/* Revert the top hero slider title like "WELCOME USER!" */
+.hero .overlay h2 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    line-height: 1.2 !important;
+}
+
+/* Keep "Explore HR Resources..." in the bold condensed font */
+.title-banner h1 {
+    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    line-height: 1.08;
+}
+

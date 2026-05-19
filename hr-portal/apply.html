@@ -92,7 +92,7 @@
                 <p>Check out available jobs and apply now</p>
             </div>
 
-            <button>Check now</button>
+            <button type="button" id="checkNowBtn">Check now</button>
         </div>
     </div>
 </div>
@@ -101,9 +101,8 @@
 <div class="details-popup" id="detailsPopup">
     <div class="popup-box">
 
-        <button class="close-popup" id="closePopup">&times;</button>
-
         <div class="popup-header">
+            <button class="close-popup" id="closePopup" type="button" aria-label="Close application details">&times;</button>
             <h2>Application Details</h2>
             <p>Please read the complete application guidelines and requirements below.</p>
         </div>
@@ -194,19 +193,31 @@
     const seeMoreBtn = document.getElementById("seeMoreBtn");
     const detailsPopup = document.getElementById("detailsPopup");
     const closePopup = document.getElementById("closePopup");
+    const checkNowBtn = document.getElementById("checkNowBtn");
 
-    seeMoreBtn.addEventListener("click", function () {
+    function openDetailsPopup() {
+        const popupBox = detailsPopup.querySelector(".popup-box");
         detailsPopup.classList.add("show-popup");
-    });
+        document.body.classList.add("popup-open");
+        popupBox.scrollTop = 0;
+    }
 
-    closePopup.addEventListener("click", function () {
+    function closeDetailsPopup() {
         detailsPopup.classList.remove("show-popup");
-    });
+        document.body.classList.remove("popup-open");
+    }
+
+    seeMoreBtn.addEventListener("click", openDetailsPopup);
+    closePopup.addEventListener("click", closeDetailsPopup);
 
     detailsPopup.addEventListener("click", function (event) {
         if (event.target === detailsPopup) {
-            detailsPopup.classList.remove("show-popup");
+            closeDetailsPopup();
         }
+    });
+
+    checkNowBtn.addEventListener("click", function () {
+        window.location.href = "recruitment.html#open-positions";
     });
 </script>
 
