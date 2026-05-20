@@ -3,11 +3,17 @@ body > *:not(#site-header):not(#site-footer) * {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+body {
+    background:
+        linear-gradient(rgba(255,255,255,0.78), rgba(255,255,255,0.78)),
+        url('../assets/phflag.png') center/cover no-repeat fixed;
+}
+
 /* Title header */
 .apply-header {
     text-align: center;
     padding: 50px 50px;
-    background: url('/assets/HTPbg.png') center/cover no-repeat;
+    background: url('../assets/HTPbg.png') center/cover no-repeat;
     position: relative;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
     border-bottom-left-radius: 30px;
