@@ -66,8 +66,9 @@ body > *:not(#site-header):not(#site-footer) * {
 /* GRID */
 .contact-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
     gap: 24px;
+    align-items: stretch;
 }
 
 /* CARD BASE */
@@ -91,14 +92,17 @@ body > *:not(#site-header):not(#site-footer) * {
 }
 
 /* MAP */
+.map-card {
+    display: flex;
+    flex-direction: column;
+}
+
 .map-card iframe {
     width: 100%;
-    height: 260px;
+    height: 360px;
     border: none;
     border-radius: 16px;
-    margin-bottom: 16px;
-    transform: scale(1);
-    transform-origin: center;
+    margin-bottom: 20px;
 }
 
 .map-details h3 {
@@ -131,9 +135,10 @@ body > *:not(#site-header):not(#site-footer) * {
 }
 
 .info-card {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    justify-content: center;
 }
 
 .contact-details .info-card:nth-child(1) {
@@ -234,6 +239,10 @@ body > *:not(#site-header):not(#site-footer) * {
 
     .contact-grid {
         grid-template-columns: 1fr;
+    }
+
+    .map-card iframe {
+        height: 300px;
     }
 
     .staff-grid {
