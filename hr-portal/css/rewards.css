@@ -182,22 +182,23 @@ body {
     transform: scale(1);
 }
 
+/* all images are placeholder on achievement-slide */
 .slide-bg-one {
     background:
         linear-gradient(135deg, rgba(15,14,107,0.88), rgba(31,54,100,0.55), rgba(52,152,219,0.35)),
-        url('../assets/rewards1.jpg') center/cover no-repeat;
+        url('../assets/bg.jpg') center/cover no-repeat;
 }
 
 .slide-bg-two {
     background:
         linear-gradient(135deg, rgba(31,54,100,0.9), rgba(52,152,219,0.55), rgba(39,174,96,0.4)),
-        url('../assets/rewards2.jpg') center/cover no-repeat;
+        url('../assets/bg.jpg') center/cover no-repeat;
 }
 
 .slide-bg-three {
     background:
         linear-gradient(135deg, rgba(15,14,107,0.85), rgba(41,128,185,0.62), rgba(234,242,255,0.25)),
-        url('../assets/rewards3.jpg') center/cover no-repeat;
+        url('../assets/bg.jpg') center/cover no-repeat;
 }
 
 .slide-overlay {

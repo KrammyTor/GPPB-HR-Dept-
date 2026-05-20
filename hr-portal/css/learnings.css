@@ -738,6 +738,7 @@ body > *:not(#site-header):not(#site-footer) * {
     transform: scale(1);
 }
 
+/* all images are placeholder on learning-slide */
 .learning-slide-bg-one {
     background:
         linear-gradient(135deg, rgba(15,14,107,0.88), rgba(31,54,100,0.55), rgba(52,152,219,0.35)),
@@ -755,6 +756,7 @@ body > *:not(#site-header):not(#site-footer) * {
         linear-gradient(135deg, rgba(15,14,107,0.85), rgba(41,128,185,0.62), rgba(234,242,255,0.25)),
         url('../assets/bg.jpg') center/cover no-repeat;
 }
+/* */
 
 .learning-slide-overlay {
     background:
