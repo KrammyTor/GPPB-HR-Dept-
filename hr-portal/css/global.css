@@ -481,3 +481,27 @@ body.no-scroll {
         display: none !important;
     }
 }
+
+#site-header,
+#site-header * {
+    font-family: Arial, sans-serif !important;
+}
+
+#site-header .top-header {
+    min-height: 86px;
+}
+
+#site-header .left-logo img,
+#site-header .right-logo img {
+    height: 60px !important;
+    object-fit: contain;
+}
+
+#site-header .bottom-nav {
+    min-height: 56px;
+}
+
+#site-header .bottom-nav a {
+    font-size: 16px !important;
+    line-height: 1.2;
+}

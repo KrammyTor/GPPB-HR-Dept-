@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+body > *:not(#site-header):not(#site-footer),
+body > *:not(#site-header):not(#site-footer) * {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .hero {
     position: relative;
     width: 100%;
@@ -79,20 +85,41 @@
     box-shadow: 0 0 8px rgba(255,255,255,1);
 }
 
-/* Careers styles */
+/* Careers background */
 .careers-section {
-    margin: 0rem 0;
+    margin: 0;
+    padding: 20px 20px 30px;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.72), rgba(98, 116, 150, 0.72)),
+        url("/assets/bg.jpg") center/cover no-repeat fixed;
 }
 
+.careers-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.careers-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* below the hero slider*/
 .title-banner {
     background: url('/assets/gppbssdsd.png') center/cover no-repeat;
-    padding: 90px 60px 90px;
+    padding: 45px 20px;
     border-radius: 12px;
     color: white;
-    font-size: clamp(22px, 5vw, 22px);
     font-weight: bold;
     line-height: 1.5;
-    margin: 20px 25px 25px;
+    margin: 10px 5px 30px;
     position: relative;
     text-align: center;
 }
@@ -108,12 +135,13 @@
 .title-banner h1 {
     position: relative;
     z-index: 1;
+    font-size: clamp(20px, 2vw, 40px);
 }
 
 .home-card-container{
     display: flex;
     gap: 30px;
-    padding: 0 20px;
+    padding: 0 5px;
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -295,6 +323,68 @@
     }
 }
 
+@media (max-width: 900px) {
+    .home-card-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        padding: 0 18px;
+    }
+
+    .image-card {
+        height: 210px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-img {
+        width: 82px;
+        height: 82px;
+        margin: 0;
+        object-fit: contain;
+    }
+
+    .card-desc {
+        display: none;
+    }
+
+    .image-card .overlay {
+        padding: 14px 10px;
+    }
+
+    .image-card .overlay h3 {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 520px) {
+    .home-card-container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .image-card {
+        height: 230px;
+    }
+
+    .card-img {
+        width: 95px;
+        height: 95px;
+    }
+
+    .image-card .overlay h3 {
+        font-size: 15px;
+    }
+}
+
 @media (max-width: 768px) {
     .hero {
         height: clamp(210px, 62vw, 320px);
@@ -362,23 +452,3 @@
         border-radius: 8px;
     }
 }
-
-/* HOME TITLE FONT FIX */
-/* Revert the top hero slider title like "WELCOME USER!" */
-.hero .overlay h2 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-weight: 700 !important;
-    letter-spacing: normal !important;
-    text-transform: none !important;
-    line-height: 1.2 !important;
-}
-
-/* Keep "Explore HR Resources..." in the bold condensed font */
-.title-banner h1 {
-    font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    line-height: 1.08;
-}
-
