@@ -93,7 +93,7 @@ body > *:not(#site-header):not(#site-footer) * {
     overflow: hidden;
     background:
         linear-gradient(rgba(0, 0, 0, 0.72), rgba(98, 116, 150, 0.72)),
-        url("/assets/bg.jpg") center/cover no-repeat fixed;
+        url("../assets/bg.jpg") center/cover no-repeat fixed;
 }
 
 .careers-section::before {
@@ -113,7 +113,7 @@ body > *:not(#site-header):not(#site-footer) * {
 
 /* below the hero slider*/
 .title-banner {
-    background: url('/assets/gppbssdsd.png') center/cover no-repeat;
+    background: url('../assets/gppbssdsd.png') center/cover no-repeat;
     padding: 45px 20px;
     border-radius: 12px;
     color: white;
@@ -152,7 +152,7 @@ body > *:not(#site-header):not(#site-footer) * {
 }
 
 .image-card {
-    background: url('/assets/footer.png') center/cover no-repeat;
+    background: url('../assets/footer.png') center/cover no-repeat;
     display: flex;
     align-items: flex-start;
     position: relative;
@@ -235,18 +235,16 @@ body > *:not(#site-header):not(#site-footer) * {
 }
 
 .quality-section {
-    background: #ffffff;
-    background-image: url('../assets/hr.png');
+    background:
+        linear-gradient(rgba(255,255,255,0.78), rgba(232, 229, 248, 0.78)),
+        url('../assets/phflag.png') center/cover no-repeat;
     background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
     padding: 100px 0 150px;
     position: relative;
     overflow: hidden;
-    margin-top: 6rem;
+    margin-top: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
-
 .quality-content {
     flex: 1 1 360px;
 }

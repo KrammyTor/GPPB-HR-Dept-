@@ -231,7 +231,7 @@ body.no-scroll {
     height: 100vh;
     background: 
         linear-gradient(rgba(48, 62, 82, 0.7), rgba(7, 54, 247, 0.7)),
-        url("/assets/gppbtso.jpg") center/cover no-repeat;
+        url("../assets/gppbtso.jpg") center/cover no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;

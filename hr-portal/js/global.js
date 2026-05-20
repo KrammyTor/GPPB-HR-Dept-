@@ -9,7 +9,7 @@ function ensureSplashScreen() {
     splashScreen.className = "splash-screen";
     splashScreen.innerHTML = `
         <div class="splash-logo">
-            <img src="../assets/gppb3.png" alt="HR Portal Logo">
+            <img src="assets/gppb3.png" alt="HR Portal Logo">
         </div>
     `;
 
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const headerContainer = document.getElementById("site-header");
 
     if (headerContainer) {
-        fetch("./components/header.html")
+        fetch("components/header.html")
             .then(res => res.text())
             .then(headerHtml => {
                 headerContainer.innerHTML = headerHtml;
@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const footerContainer = document.getElementById("site-footer");
 
     if (footerContainer) {
-        fetch("./components/footer.html")
+        fetch("components/footer.html")
             .then(res => res.text())
             .then(html => {
                 footerContainer.innerHTML = html;
