@@ -146,7 +146,6 @@ body {
     color: black;
 }
 
-/* Shenanigans / floating particles */
 .shenanigans {
     width: 300px;
     position: fixed;
@@ -159,7 +158,8 @@ body {
     display: block !important;
 }
 
-/*.floating-icon {
+/* Unused codes for the floating icons
+.floating-icon {
     position: absolute;
     font-size: 2rem;
     animation: float 6s ease-in-out infinite;
@@ -222,7 +222,6 @@ body.no-scroll {
     margin: 0 auto;
 }
 
-/* Splash Screen */
 .splash-screen {
     position: fixed;
     top: 0;
@@ -265,7 +264,6 @@ body.no-scroll {
     pointer-events: none;
 }
 
-/* SMALL-HEIGHT LANDSCAPE DEVICES (e.g., 1026x600) */
 @media (max-width: 1100px) and (max-height: 700px) {
     .top-header {
         gap: 12px;
@@ -304,7 +302,6 @@ body.no-scroll {
 }
 
 @media (max-width: 1024px) {
-    /* Tablet and small laptop adjustments */
     body {
         background-attachment: scroll;
     }
@@ -351,7 +348,6 @@ body.no-scroll {
 }
 
 @media (max-width: 768px) {
-    /* Phone layout: switch nav to sidebar drawer */
     body.nav-open {
         overflow: hidden;
     }
@@ -377,7 +373,6 @@ body.no-scroll {
     }
 
     .nav-toggle {
-        /* Show the Menu button only on phones */
         display: inline-flex;
         margin-left: 0;
         order: 0;
@@ -392,7 +387,7 @@ body.no-scroll {
     }
 
     .bottom-nav {
-        /* Sidebar drawer (hidden by default) */
+        /* Sidebar */
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -446,7 +441,6 @@ body.no-scroll {
     .bottom-nav a {
         font-size: 0.95rem;
         padding: 10px 12px;
-        /* PHONE SIDEBAR: align link labels to the left */
         text-align: left;
     }
 
@@ -455,12 +449,10 @@ body.no-scroll {
     }
 
     body.nav-open .bottom-nav {
-        /* Sidebar visible when body has nav-open */
         transform: translateX(0);
     }
 
     .nav-backdrop {
-        /* Dark overlay behind sidebar */
         display: block;
         position: fixed;
         inset: 0;
@@ -472,7 +464,6 @@ body.no-scroll {
     }
 
     body.nav-open .nav-backdrop {
-        /* Activate overlay when sidebar is open */
         opacity: 1;
         pointer-events: auto;
     }

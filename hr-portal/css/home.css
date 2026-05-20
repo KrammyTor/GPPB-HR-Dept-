@@ -85,7 +85,7 @@ body > *:not(#site-header):not(#site-footer) * {
     box-shadow: 0 0 8px rgba(255,255,255,1);
 }
 
-/* Careers background */
+/* Careers backdrop */
 .careers-section {
     margin: 0;
     padding: 20px 20px 30px;

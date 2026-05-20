@@ -163,7 +163,6 @@ body > *:not(#site-header):not(#site-footer) * {
     font-weight: 400;
 }
 
-/* Requirements */
 .requirements-title {
     font-size: 36px;
     font-weight: 700;
@@ -248,7 +247,6 @@ body > *:not(#site-header):not(#site-footer) * {
     line-height: 1.6;
 }
 
-/* Mobile */
 @media (max-width: 1000px) {
     .main-content {
         grid-template-columns: 1fr;
@@ -292,19 +290,15 @@ body > *:not(#site-header):not(#site-footer) * {
     }
 }
 
-/* Smooth scroll */
 html {
     scroll-behavior: smooth;
 }
 
-/* Focus visible for accessibility */
 .req-card:focus-visible {
     outline: 3px solid #3498db;
     outline-offset: 4px;
 }
 
-
-/* ================= CONSISTENT BOLD CONDENSED HEADER FONT ================= */
 .internship-hero .hero-content h1,
 .requirements-title,
 .qr-card h2 {

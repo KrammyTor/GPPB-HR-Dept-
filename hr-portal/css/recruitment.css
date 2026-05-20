@@ -6,7 +6,6 @@ body > *:not(#site-header):not(#site-footer) * {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* ================= HERO ================= */
 .internship-hero {
     background: linear-gradient(135deg, #0f0e6b 0%, #1f3664 50%, #3498db 100%);
     color: white;
@@ -93,7 +92,6 @@ body > *:not(#site-header):not(#site-footer) * {
     }
 }
 
-/* ================= STATS ================= */
 .stats-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     padding: 80px 0;
@@ -145,7 +143,6 @@ body > *:not(#site-header):not(#site-footer) * {
     font-size: 1.2rem;
 }
 
-/* ================= JOBS ================= */
 .jobs-section {
     padding: 50px 0px;
     max-width: 1200px;
@@ -296,7 +293,6 @@ body > *:not(#site-header):not(#site-footer) * {
     box-shadow: 0 25px 60px rgba(52,152,219,0.5);
 }
 
-/* ================= LOAD MORE ================= */
 .load-more {
     text-align: center;
     margin-top: 50px;
@@ -323,7 +319,6 @@ body > *:not(#site-header):not(#site-footer) * {
     box-shadow: 0 30px 70px rgba(52,152,219,0.4);
 }
 
-/* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
     .job-listings {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -365,7 +360,6 @@ body > *:not(#site-header):not(#site-footer) * {
     }
 }
 
-/* BOLD CONDENSED TITLE FONT */
 .internship-hero h1,
 .recruitment-hero h1,
 .careers-hero h1,
@@ -380,8 +374,6 @@ body > *:not(#site-header):not(#site-footer) * {
     line-height: 1;
 }
 
-
-/* ================= FIXES: HERO FONT + JOB BUTTON ALIGNMENT ================= */
 .internship-hero h1 {
     font-family: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
     font-weight: 400 !important;
@@ -416,8 +408,6 @@ body > *:not(#site-header):not(#site-footer) * {
     margin-top: 0;
 }
 
-
-/* ================= INTERNSHIP APPLICATION CARD ================= */
 .internship-application-section {
     max-width: 1200px;
     margin: 0 auto;
@@ -508,7 +498,6 @@ body > *:not(#site-header):not(#site-footer) * {
     box-shadow: 0 22px 55px rgba(52,152,219,0.45);
 }
 
-/* Anchor offset so Check Now lands cleanly on Open Positions */
 #open-positions {
     scroll-margin-top: 130px;
 }

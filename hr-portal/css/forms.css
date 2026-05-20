@@ -248,7 +248,6 @@ body > *:not(#site-header):not(#site-footer) * {
     margin: 0;
 }
 
-/* Bottom section */
 .form-footer {
     margin-top: auto;
     display: flex;
@@ -468,7 +467,6 @@ body > *:not(#site-header):not(#site-footer) * {
     color: #3498db;
 }
 
-/* Toast */
 .download-toast {
     position: fixed;
     bottom: 32px;
@@ -496,9 +494,6 @@ body > *:not(#site-header):not(#site-footer) * {
     font-size: 20px;
 }
 
-
-
-/* Final Forms Search + Guide Fix */
 .filters,
 .filter-btn {
     display: none !important;
@@ -663,8 +658,6 @@ body > *:not(#site-header):not(#site-footer) * {
     }
 }
 
-
-/* Final requested forms adjustments */
 .filters,
 .filter-btn,
 .filter-tabs,

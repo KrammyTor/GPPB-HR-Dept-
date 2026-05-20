@@ -5,7 +5,6 @@ const dots = document.querySelectorAll(".dot");
 const prev = document.querySelector(".hero-btn.prev");
 const next = document.querySelector(".hero-btn.next");
 
-// update UI
 function updateSlider() {
     slides.forEach(s => s.classList.remove("active"));
     dots.forEach(d => d.classList.remove("active"));
@@ -14,19 +13,16 @@ function updateSlider() {
     dots[index].classList.add("active");
 }
 
-// go next slide
 function showNext() {
     index = (index + 1) % slides.length;
     updateSlider();
 }
 
-// go previous slide
 function showPrev() {
     index = (index - 1 + slides.length) % slides.length;
     updateSlider();
 }
 
-// DOT CLICK SUPPORT
 dots.forEach((dot, i) => {
     dot.addEventListener("click", () => {
         index = i;
@@ -34,7 +30,6 @@ dots.forEach((dot, i) => {
     });
 });
 
-// ARROWS (SAFE CHECK so it won't break if missing)
 if (next) {
     next.addEventListener("click", showNext);
 }
@@ -43,7 +38,6 @@ if (prev) {
     prev.addEventListener("click", showPrev);
 }
 
-// AUTO SLIDE
 setInterval(showNext, 4000);
 
 function requestTick() {

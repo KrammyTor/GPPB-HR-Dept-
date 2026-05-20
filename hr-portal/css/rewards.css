@@ -112,7 +112,6 @@ body {
     }
 }
 
-/* ================= ACHIEVEMENTS SECTION ================= */
 .achievements-section {
     background: linear-gradient(135deg, #f8fafc 0%, #eaf2ff 100%);
     padding: 28px 36px 80px;
@@ -124,7 +123,6 @@ body {
     margin: 0 auto;
 }
 
-/* ================= ACHIEVEMENT HERO SLIDER ================= */
 .achievement-slider {
     width: min(88vw, 1480px);
     max-width: none;
@@ -271,7 +269,6 @@ body {
     background: #ffffff;
 }
 
-/* ================= STATS INSIDE SLIDER ================= */
 .achievement-stats {
     position: absolute;
     left: 34px;
@@ -322,7 +319,6 @@ body {
     margin: 0;
 }
 
-/* ================= FEATURED ================= */
 .featured-achievement {
     background: white;
     border-radius: 28px;
@@ -369,7 +365,6 @@ body {
     margin: 0;
 }
 
-/* ================= GRID ================= */
 .achievements-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -454,7 +449,6 @@ body {
     font-size: 15px;
 }
 
-/* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
     .achievement-slider {
         min-height: 700px;
@@ -526,7 +520,6 @@ body {
     }
 }
 
-/* BOLD CONDENSED TITLE FONT */
 .rewards-hero h1,
 .section-title,
 .section-header h2,
@@ -540,7 +533,6 @@ body {
     line-height: 1;
 }
 
-/* TEXT WIDTH ONLY - lets the hero text use more horizontal space without changing slider/cards sizes */
 .slide-content {
     max-width: 1120px !important;
 }

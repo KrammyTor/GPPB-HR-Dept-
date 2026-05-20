@@ -76,9 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //    icon.textContent = emojis[index % emojis.length];
     //});
 
-    // =========================
-    // PARTICLES CANVAS
-    // =========================
     const canvas = document.getElementById('particles-canvas');
 
     if (canvas) {
@@ -122,9 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
         animate();
     }
 
-    // =========================
-    // HEADER LOAD
-    // =========================
     const headerContainer = document.getElementById("site-header");
 
     if (headerContainer) {
@@ -169,9 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     link.addEventListener("click", closeMobileNav);
                 });
 
-                // =========================
-                // SEARCH FUNCTIONALITY
-                // =========================
                 const searchInput = headerContainer.querySelector("#searchInput");
                 const searchButton = headerContainer.querySelector("#searchButton");
                 const mobileSearchInput = headerContainer.querySelector("#mobileSearchInput");
@@ -268,7 +259,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
 
-                // Desktop keeps top-fixed nav behavior; phones pin sidebar to top.
                 const syncFixedNavPosition = () => {
                     if (!topHeader || !bottomNav) return;
 
@@ -301,9 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error("Header failed to load:", err));
     }
 
-    // =========================
-    // FOOTER LOAD
-    // =========================
     const footerContainer = document.getElementById("site-footer");
 
     if (footerContainer) {
@@ -315,9 +302,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error("Footer failed to load:", err));
     }
 
-    // =========================
-    // TABS SYSTEM
-    // =========================
     const tabs = document.querySelectorAll(".tab");
     const grids = document.querySelectorAll(".grid");
 
